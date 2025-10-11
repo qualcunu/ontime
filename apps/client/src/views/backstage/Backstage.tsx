@@ -127,18 +127,18 @@ function Backstage({ events, customFields, projectData, isMirrored, settings }: 
                 <SuperscriptTime time={startedAt} className='time-entry__value' />
               </div>
               <div className='timer-gap' />
-              <div className='time-entry'>
-                <div className='time-entry__label'>{getLocalizedString('common.expected_finish')}</div>
+              <div className='time-entry' style={{color: nowSecondary}}>
+                <div className='time-entry__label' style={{color: nowSecondary}}>{getLocalizedString('common.expected_finish')}</div>
                 {isOvertime(time.current) ? (
-                  <div className='time-entry__value'>{getLocalizedString('countdown.overtime')}</div>
+                  <div className='time-entry__value' style={{color: nowSecondary}}>{getLocalizedString('countdown.overtime')}</div>
                 ) : (
                   <SuperscriptTime time={formatTime(time.expectedFinish)} className='time-entry__value' />
                 )}
               </div>
               <div className='timer-gap' />
-              <div className='time-entry'>
-                <div className='time-entry__label'>{getLocalizedString('common.stage_timer')}</div>
-                <div className='time-entry__value'>{displayTimer}</div>
+              <div className='time-entry' style={{color: nowSecondary}}>
+                <div className='time-entry__label' style={{color: nowSecondary}}>{getLocalizedString('common.stage_timer')}</div>
+                <div className='time-entry__value' style={{color: nowSecondary}}>{displayTimer}</div>
               </div>
             </div>
           </div>
