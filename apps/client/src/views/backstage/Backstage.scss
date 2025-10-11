@@ -249,12 +249,9 @@
 
 @keyframes blink {
   0% {
-    background-color: var(--card-background-color-override, $viewer-card-bg-color);
   }
   50% {
-    background-color: var(--card-background-color-blink-override, $playback-start);
   }
   100% {
-    background-color: var(--card-background-color-override, $viewer-card-bg-color);
   }
 }
