@@ -34,6 +34,7 @@ export function getCardData(
   secondarySource: keyof OntimeEvent | null,
   playback: Playback,
   succ: OntimeEvent | null,
+  cucc: OntimeEvent | null,
 ) {
   if (playback === Playback.Stop) {
     return {
@@ -44,6 +45,7 @@ export function getCardData(
       nextMain: undefined,
       nextSecondary: undefined,
       lucc: false,
+      mucc: false,
     };
   }
 
@@ -53,6 +55,7 @@ export function getCardData(
   const nextMain = getPropertyValue(eventNext, mainSource ?? 'title') || enDash;
   const nextSecondary = getPropertyValue(eventNext, secondarySource);
   const lucc = getPropertyValue(eventNow, succ ?? 'colour');
+  const mucc = getPropertyValue(eventNext, cucc ?? 'colour');
 
   return {
     showNow: eventNow !== null,
@@ -62,5 +65,6 @@ export function getCardData(
     nextMain,
     nextSecondary,
     lucc,
+    mucc,
   };
 }
