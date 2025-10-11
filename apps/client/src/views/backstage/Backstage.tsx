@@ -143,7 +143,6 @@ function Backstage({ events, customFields, projectData, isMirrored, settings }: 
               </div>
             </div>
           </div>
-      console.log(fucc);
         )}
 
         {showPending && (
