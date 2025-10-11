@@ -164,7 +164,7 @@ function Backstage({ events, customFields, projectData, isMirrored, settings }: 
         )}
 
         {showNext && hasEvents && (
-          <TitleCard className='event' label='next' title={nextMain} secondary={nextSecondary} style={mucc} />
+          <TitleCard className='event' label='next' title={nextMain} secondary={nextSecondary} lel={mucc} />
         )}
       </div>
 
