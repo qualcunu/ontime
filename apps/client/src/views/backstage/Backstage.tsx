@@ -61,7 +61,7 @@ function Backstage({ events, customFields, projectData, isMirrored, settings }: 
 
   // gather card data
   const hasEvents = events.length > 0;
-  const { showNow, nowMain, nowSecondary, showNext, nextMain, nextSecondary, lucc, mucc, nucc, qucc } = getCardData(
+  const { showNow, nowMain, nowSecondary, showNext, nextMain, nextSecondary, lucc, mucc} = getCardData(
     eventNow,
     eventNext,
     'title',
@@ -119,27 +119,27 @@ function Backstage({ events, customFields, projectData, isMirrored, settings }: 
       <div className='card-container'>
         {showNow && (
           <div className={cx(['event', 'now', blinkClass && 'blink'])} style={{backgroundColor: lucc }}>
-            <TitleCard title={nowMain} secondary={nowSecondary} lawl={nucc}/>
+            <TitleCard title={nowMain} secondary={nowSecondary} lawl={nowSecondary}/>
             <div className='timer-group'>
               <div className='time-entry'>
-                <div className={cx(['time-entry__label', isPendingStart && 'time-entry--pending'])} style={{color: nucc}}>
+                <div className={cx(['time-entry__label', isPendingStart && 'time-entry--pending'])} style={{color: nowSecondary}}>
                   {isPendingStart ? getLocalizedString('countdown.waiting') : getLocalizedString('common.started_at')}
                 </div>
                 <SuperscriptTime time={startedAt} className='time-entry__value' style={{color: nucc}}/>
               </div>
               <div className='timer-gap'/>
               <div className='time-entry' style={{color: nucc}}>
-                <div className='time-entry__label' style={{color: nucc}}>{getLocalizedString('common.expected_finish')}</div>
+                <div className='time-entry__label' style={{color: nowSecondary}}>{getLocalizedString('common.expected_finish')}</div>
                 {isOvertime(time.current) ? (
-                  <div className='time-entry__value' style={{color: nucc}}>{getLocalizedString('countdown.overtime')}</div>
+                  <div className='time-entry__value' style={{color: nowSecondary}}>{getLocalizedString('countdown.overtime')}</div>
                 ) : (
-                  <SuperscriptTime time={formatTime(time.expectedFinish)} className='time-entry__value' style={{color: nucc}}/>
+                  <SuperscriptTime time={formatTime(time.expectedFinish)} className='time-entry__value' style={{color: nowSecondary}}/>
                 )}
               </div>
               <div className='timer-gap' />
-              <div className='time-entry' style={{color: nucc}}>
-                <div className='time-entry__label' style={{color: nucc}}>{getLocalizedString('common.stage_timer')}</div>
-                <div className='time-entry__value' style={{color: nucc}}>{displayTimer}</div>
+              <div className='time-entry' style={{color: nowSecondary}}>
+                <div className='time-entry__label' style={{color: nowSecondary}}>{getLocalizedString('common.stage_timer')}</div>
+                <div className='time-entry__value' style={{color: nowSecondary}}>{displayTimer}</div>
               </div>
             </div>
           </div>
@@ -147,70 +147,30 @@ function Backstage({ events, customFields, projectData, isMirrored, settings }: 
 
         {showPending && (
           <div className='event'>
-            <div className='title-card__placeholder' style={{color: nucc}}>{getLocalizedString('countdown.waiting')}</div>
+            <div className='title-card__placeholder' style={{color: nowSecondary}}>{getLocalizedString('countdown.waiting')}</div>
             <div className='timer-group'>
               <div className='time-entry'>
-                <div className={cx(['time-entry__label', isPendingStart && 'time-entry--pending'])} style={{color: nucc}}>
+                <div className={cx(['time-entry__label', isPendingStart && 'time-entry--pending'])} style={{color: nowSecondary}}>
                   {getLocalizedString('common.scheduled_start')}
                 </div>
-                <SuperscriptTime time={scheduledStart} className='time-entry__value' style={{color: nucc}}/>
+                <SuperscriptTime time={scheduledStart} className='time-entry__value' style={{color: nowSecondary}}/>
               </div>
               <div className='timer-gap' />
               <div className='time-entry'>
-                <div className='time-entry__label' style={{color: nucc}}>{getLocalizedString('common.scheduled_end')}</div>
-                <SuperscriptTime time={scheduledEnd} className='time-entry__value' style={{color: nucc}}/>
+                <div className='time-entry__label' style={{color: nowSecondary}}>{getLocalizedString('common.scheduled_end')}</div>
+                <SuperscriptTime time={scheduledEnd} className='time-entry__value' style={{color: nowSecondary}}/>
               </div>
             </div>
           </div>
         )}
 
         {showNext && hasEvents && (
-          <TitleCard className='event' label='next' title={nextMain} secondary={nextSecondary} lel={lucc} lawl={qucc} />
+          <TitleCard className='event' label='next' title={nextMain} secondary={nextSecondary} lel={lucc} lawl={mucc} />
         )}
       </div>
 
       {showSchedule && <ScheduleExport selectedId={selectedEventId} />}
-
-      <div className={cx(['info', !showSchedule && 'info--stretch'])}>
-        {extraInfo && <ExtraInfo projectData={projectData} size={qrSize} source={extraInfo} />}
-        <div className='info-card'>
-          {projectData.url && <QRCode value={projectData.url} size={qrSize} level='L' className='info-card__qr' />}
-          {projectData.info && <div className='info-card__message'>{projectData.info}</div>}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-interface ExtraInfoProps {
-  projectData: ProjectData;
-  size: number;
-  source: string;
-}
-function ExtraInfo({ projectData, size, source }: ExtraInfoProps) {
-  const info = projectData.custom.find((entry, index) => {
-    const label = `${index}-${entry.title}`;
-    return label === source;
-  });
-
-  if (!info) {
-    return null;
-  }
-
-  return (
-    <div className='info-card'>
-      {info.url && (
-        <img
-          className='info-card__img'
-          width={size}
-          src={info.url}
-          onError={(event) => (event.currentTarget.style.display = 'none')}
-        />
-      )}
-      <div className='info__column'>
-        {info.title && <div className='info-card__label'>{info.title}</div>}
-        {info.value && <div className='info-card__message'>{info.value}</div>}
-      </div>
+      
     </div>
   );
 }
