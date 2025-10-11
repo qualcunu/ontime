@@ -117,7 +117,7 @@ function Backstage({ events, customFields, projectData, isMirrored, settings }: 
 
       <div className='card-container'>
         {showNow && (
-          <div className={cx(['event', 'now', blinkClass && 'blink'])} style={{ backgroundColor: fucc }}>
+          <div className={cx(['event', 'now', blinkClass && 'blink'])} style=background-Color: 'colour'>
             <TitleCard title={nowMain} secondary={nowSecondary} />
             <div className='timer-group'>
               <div className='time-entry'>
