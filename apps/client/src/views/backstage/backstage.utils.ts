@@ -60,8 +60,8 @@ export function getCardData(
   const nextSecondary = getPropertyValue(eventNext, secondarySource);
   const lucc = getPropertyValue(eventNow, succ ?? 'colour');
   const mucc = getPropertyValue(eventNext, cucc ?? 'colour');
-  const nucc = getPropertyValue(eventNow, vucc ?? 'custom');
-  const qucc = getPropertyValue(eventNext, rucc ?? 'custom');
+  const nucc = getPropertyValue(eventNow, vucc ?? 'custom'[0]);
+  const qucc = getPropertyValue(eventNext, rucc ?? 'custom'[0]);
 
   return {
     showNow: eventNow !== null,
