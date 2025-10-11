@@ -61,7 +61,7 @@ function Backstage({ events, customFields, projectData, isMirrored, settings }: 
 
   // gather card data
   const hasEvents = events.length > 0;
-  const { showNow, nowMain, nowSecondary, showNext, nextMain, nextSecondary, lucc } = getCardData(
+  const { showNow, nowMain, nowSecondary, showNext, nextMain, nextSecondary, lucc, mucc } = getCardData(
     eventNow,
     eventNext,
     'title',
@@ -164,7 +164,7 @@ function Backstage({ events, customFields, projectData, isMirrored, settings }: 
         )}
 
         {showNext && hasEvents && (
-          <TitleCard className='event' label='next' title={nextMain} secondary={nextSecondary} />
+          <TitleCard className='event' label='next' title={nextMain} secondary={nextSecondary} style={mucc} />
         )}
       </div>
 
