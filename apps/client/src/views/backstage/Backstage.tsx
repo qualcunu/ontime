@@ -118,8 +118,8 @@ function Backstage({ events, customFields, projectData, isMirrored, settings }: 
 
       <div className='card-container'>
         {showNow && (
-          <div className={cx(['event', 'now', blinkClass && 'blink'])} style={{backgroundColor: lucc }}>
-            <TitleCard title={nowMain} secondary={nowSecondary} lel={nucc}/>
+          <div className={cx(['event', 'now', blinkClass && 'blink'])} style={{backgroundColor: qucc }}>
+            <TitleCard title={nowMain} secondary={nowSecondary} lel={lucc}/>
             <div className='timer-group'>
               <div className='time-entry'>
                 <div className={cx(['time-entry__label', isPendingStart && 'time-entry--pending'])} style={{color: nucc}}>
@@ -165,7 +165,7 @@ function Backstage({ events, customFields, projectData, isMirrored, settings }: 
         )}
 
         {showNext && hasEvents && (
-          <TitleCard className='event' label='next' title={nextMain} secondary={nextSecondary} lel={qucc} lawl={mucc} />
+          <TitleCard className='event' label='next' title={nextMain} secondary={nextSecondary} lel={qucc} lawl={qucc} />
         )}
       </div>
 
