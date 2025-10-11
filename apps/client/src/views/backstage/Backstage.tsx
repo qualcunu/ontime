@@ -67,7 +67,7 @@ function Backstage({ events, customFields, projectData, isMirrored, settings }: 
     'title',
     secondarySource,
     time.playback,
-    succ,
+    'colour',
   );
 
   // gather timer data
