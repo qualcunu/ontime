@@ -21,7 +21,7 @@ const TitleCard = forwardRef((props: TitleCardProps, ref: ForwardedRef<HTMLDivEl
 
   return (
     <div className={cx(['title-card', className])} ref={ref}>
-      <span className='title-card__title' style={{color: stayl }}>{title}</span>
+      <span className='title-card__title' style={stayl}>{title}</span>
       <span className={cx(['title-card__label', accent && 'title-card__label--accent'])}>
         {label && getLocalizedString(`common.${label}`)}
       </span>
