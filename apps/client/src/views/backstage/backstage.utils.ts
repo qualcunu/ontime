@@ -33,6 +33,8 @@ export function getCardData(
   mainSource: keyof OntimeEvent | null,
   secondarySource: keyof OntimeEvent | null,
   playback: Playback,
+  succ: OntimeEvent | null,
+  cucc: OntimeEvent | null,
   extraInfo: OntimeEvent | null,
 ) {
   if (playback === Playback.Stop) {
