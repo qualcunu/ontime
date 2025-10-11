@@ -61,12 +61,13 @@ function Backstage({ events, customFields, projectData, isMirrored, settings }: 
 
   // gather card data
   const hasEvents = events.length > 0;
-  const { showNow, nowMain, nowSecondary, showNext, nextMain, nextSecondary } = getCardData(
+  const { showNow, nowMain, nowSecondary, showNext, nextMain, nextSecondary, fucc } = getCardData(
     eventNow,
     eventNext,
     'title',
     secondarySource,
     time.playback,
+    'colour',
   );
 
   // gather timer data
@@ -116,7 +117,7 @@ function Backstage({ events, customFields, projectData, isMirrored, settings }: 
 
       <div className='card-container'>
         {showNow && (
-          <div className={cx(['event', 'now', blinkClass && 'blink'])}>
+          <div className={cx(['event', 'now', blinkClass && 'blink'])} style={{ backgroundColor: colour }}>
             <TitleCard title={nowMain} secondary={nowSecondary} />
             <div className='timer-group'>
               <div className='time-entry'>
