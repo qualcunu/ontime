@@ -47,10 +47,10 @@ export const getBackstageOptions = (
       options: [
         {
           id: 'extra-info',
-          title: 'Extra info',
-          description: 'Select a project data source to show in the view',
+          title: 'Text color alteration',
+          description: 'Use a custom field to alter text color per event.',
           type: 'option',
-          values: projectDataOptions,
+          values: secondaryOptions,
           defaultValue: 'none',
         },
       ],
