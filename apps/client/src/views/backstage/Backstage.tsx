@@ -119,7 +119,7 @@ function Backstage({ events, customFields, projectData, isMirrored, settings }: 
       <div className='card-container'>
         {showNow && (
           <div className={cx(['event', 'now', blinkClass && 'blink'])} style={{backgroundColor: lucc }}>
-            <TitleCard title={nowMain} secondary={nowSecondary} lawl={nucc}/>
+            <TitleCard title={nowMain} secondary={nowSecondary} lel={nucc}/>
             <div className='timer-group'>
               <div className='time-entry'>
                 <div className={cx(['time-entry__label', isPendingStart && 'time-entry--pending'])} style={{color: nucc}}>
