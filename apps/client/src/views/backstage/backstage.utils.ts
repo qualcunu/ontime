@@ -46,6 +46,8 @@ export function getCardData(
       nextSecondary: undefined,
       lucc: false,
       mucc: false,
+      nucc: undefined,
+      qucc: undefined,
     };
   }
 
@@ -56,6 +58,8 @@ export function getCardData(
   const nextSecondary = getPropertyValue(eventNext, secondarySource);
   const lucc = getPropertyValue(eventNow, succ ?? 'colour');
   const mucc = getPropertyValue(eventNext, cucc ?? 'colour');
+  const nucc = getPropertyValue(eventNow, extraInfo);
+  const qucc = getPropertyValue(eventNext, extraInfo);
 
   return {
     showNow: eventNow !== null,
@@ -66,5 +70,7 @@ export function getCardData(
     nextSecondary,
     lucc,
     mucc,
+    nucc,
+    qucc,
   };
 }
