@@ -125,10 +125,10 @@ function Backstage({ events, customFields, projectData, isMirrored, settings }: 
                 <div className={cx(['time-entry__label', isPendingStart && 'time-entry--pending'])} style={{color: nowSecondary}}>
                   {isPendingStart ? getLocalizedString('countdown.waiting') : getLocalizedString('common.started_at')}
                 </div>
-                <SuperscriptTime time={startedAt} className='time-entry__value' style={{color: nucc}}/>
+                <SuperscriptTime time={startedAt} className='time-entry__value' style={{color: nowSecondary}}/>
               </div>
               <div className='timer-gap'/>
-              <div className='time-entry' style={{color: nucc}}>
+              <div className='time-entry' style={{color: nowSecondary}}>
                 <div className='time-entry__label' style={{color: nowSecondary}}>{getLocalizedString('common.expected_finish')}</div>
                 {isOvertime(time.current) ? (
                   <div className='time-entry__value' style={{color: nowSecondary}}>{getLocalizedString('countdown.overtime')}</div>
