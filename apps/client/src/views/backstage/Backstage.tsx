@@ -118,7 +118,7 @@ function Backstage({ events, customFields, projectData, isMirrored, settings }: 
 
       <div className='card-container'>
         {showNow && (
-          <div className={cx(['event', 'now', blinkClass && 'blink'])} style={{backgroundColor: {colour} }}>
+          <div className={cx(['event', 'now', blinkClass && 'blink'])} style={{backgroundColor: {fucc} }}>
             <TitleCard title={nowMain} secondary={nowSecondary} />
             <div className='timer-group'>
               <div className='time-entry'>
@@ -143,6 +143,7 @@ function Backstage({ events, customFields, projectData, isMirrored, settings }: 
               </div>
             </div>
           </div>
+      console.log(fucc);
         )}
 
         {showPending && (
