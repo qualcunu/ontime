@@ -60,7 +60,7 @@ export const getBackstageOptions = (
 
 type BackstageOptions = {
   secondarySource: keyof OntimeEvent | null;
-  extraInfo: string | null;
+  extraInfo: keyof OntimeEvent | null;
 };
 
 /**
@@ -73,7 +73,7 @@ function getOptionsFromParams(searchParams: URLSearchParams, defaultValues?: URL
 
   return {
     secondarySource: getValue('secondary-src') as keyof OntimeEvent | null,
-    extraInfo: getValue('extra-info'),
+    extraInfo: getValue('extra-info') as keyof OntimeEvent | null,
   };
 }
 
