@@ -43,7 +43,7 @@ export function getCardData(
       showNext: false,
       nextMain: undefined,
       nextSecondary: undefined,
-      lucc: undefined,
+      lucc: false,
     };
   }
 
@@ -52,7 +52,7 @@ export function getCardData(
   const nowSecondary = getPropertyValue(eventNow, secondarySource);
   const nextMain = getPropertyValue(eventNext, mainSource ?? 'title') || enDash;
   const nextSecondary = getPropertyValue(eventNext, secondarySource);
-  const lucc = getPropertyValue(eventNow, succ ?? 'colour') || enDash;
+  const lucc = getPropertyValue(eventNow, succ ?? 'colour');
 
   return {
     showNow: eventNow !== null,
