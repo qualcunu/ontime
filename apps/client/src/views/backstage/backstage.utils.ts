@@ -35,7 +35,6 @@ export function getCardData(
   playback: Playback,
   succ: OntimeEvent | null,
   cucc: OntimeEvent | null,
-  extraInfo: keyof OntimeEvent | null,
 ) {
   if (playback === Playback.Stop) {
     return {
@@ -59,8 +58,8 @@ export function getCardData(
   const nextSecondary = getPropertyValue(eventNext, secondarySource);
   const lucc = getPropertyValue(eventNow, succ ?? 'colour');
   const mucc = getPropertyValue(eventNext, cucc ?? 'colour');
-  const nucc = getPropertyValue(eventNow, extraInfo);
-  const qucc = getPropertyValue(eventNext, extraInfo);
+  const nucc = getPropertyValue(eventNow, custom);
+  const qucc = getPropertyValue(eventNext, custom);
 
   return {
     showNow: eventNow !== null,
