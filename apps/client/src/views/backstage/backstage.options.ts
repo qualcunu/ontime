@@ -50,7 +50,7 @@ export const getBackstageOptions = (
           title: 'Text color alteration',
           description: 'Use a custom field to alter text color per event.',
           type: 'option',
-          values: secondaryOptions,
+          values: customFieldOptions,
           defaultValue: 'none',
         },
       ],
