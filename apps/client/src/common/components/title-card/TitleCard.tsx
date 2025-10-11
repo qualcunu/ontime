@@ -15,7 +15,7 @@ interface TitleCardProps {
 }
 
 const TitleCard = forwardRef((props: TitleCardProps, ref: ForwardedRef<HTMLDivElement>) => {
-  const { label, title, secondary, lel, lawl, className = '' } = props;
+  const { label, title, secondary, className = '', lel, lawl} = props;
   const { getLocalizedString } = useTranslation();
 
   const accent = label === 'now';
@@ -26,7 +26,7 @@ const TitleCard = forwardRef((props: TitleCardProps, ref: ForwardedRef<HTMLDivEl
       <span className={cx(['title-card__label', accent && 'title-card__label--accent'])} style={{color: lawl}}>
         {label && getLocalizedString(`common.${label}`)}
       </span>
-      <div className='title-card__secondary' style={{color: lawl }}>{secondary}</div>
+      <div className='title-card__secondary' style={{color: lawl}}>{secondary}</div>
     </div>
   );
 });
