@@ -61,13 +61,14 @@ function Backstage({ events, customFields, projectData, isMirrored, settings }: 
 
   // gather card data
   const hasEvents = events.length > 0;
-  const { showNow, nowMain, nowSecondary, showNext, nextMain, nextSecondary, lucc, mucc } = getCardData(
+  const { showNow, nowMain, nowSecondary, showNext, nextMain, nextSecondary, lucc, mucc, nucc, qucc } = getCardData(
     eventNow,
     eventNext,
     'title',
     secondarySource,
     time.playback,
     'colour',
+    extraInfo,
   );
 
   // gather timer data
@@ -127,18 +128,18 @@ function Backstage({ events, customFields, projectData, isMirrored, settings }: 
                 <SuperscriptTime time={startedAt} className='time-entry__value' />
               </div>
               <div className='timer-gap' />
-              <div className='time-entry' style={{color: nowSecondary}}>
-                <div className='time-entry__label' style={{color: nowSecondary}}>{getLocalizedString('common.expected_finish')}</div>
+              <div className='time-entry' style={{color: nucc}}>
+                <div className='time-entry__label' style={{color: nucc}}>{getLocalizedString('common.expected_finish')}</div>
                 {isOvertime(time.current) ? (
-                  <div className='time-entry__value' style={{color: nowSecondary}}>{getLocalizedString('countdown.overtime')}</div>
+                  <div className='time-entry__value' style={{color: nucc}}>{getLocalizedString('countdown.overtime')}</div>
                 ) : (
                   <SuperscriptTime time={formatTime(time.expectedFinish)} className='time-entry__value' />
                 )}
               </div>
               <div className='timer-gap' />
-              <div className='time-entry' style={{color: nowSecondary}}>
-                <div className='time-entry__label' style={{color: nowSecondary}}>{getLocalizedString('common.stage_timer')}</div>
-                <div className='time-entry__value' style={{color: nowSecondary}}>{displayTimer}</div>
+              <div className='time-entry' style={{color: nucc}}>
+                <div className='time-entry__label' style={{color: nucc}}>{getLocalizedString('common.stage_timer')}</div>
+                <div className='time-entry__value' style={{color: nucc}}>{displayTimer}</div>
               </div>
             </div>
           </div>
