@@ -253,6 +253,15 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
                 <div className={cx(['secondary', !secondaryContent && 'secondary--hidden'])} style={{ fontSize: `${externalFontSize}vw` }}>
                     {secondaryContent}
                 </div>
+                <div className={cx(['secondary', !secondaryContent2 && 'secondary--hidden'])} style={{ fontSize: `${externalFontSize}vw` }}>
+                    {secondaryContent2}
+                </div>
+                <div className={cx(['secondary', !secondaryContent3 && 'secondary--hidden'])} style={{ fontSize: `${externalFontSize}vw` }}>
+                    {secondaryContent3}
+                </div>
+                <div className={cx(['secondary4', !secondaryContent && 'secondary--hidden'])} style={{ fontSize: `${externalFontSize}vw` }}>
+                    {secondaryContent4}
+                </div>
             </div>
 
             {showSchedule && <ScheduleExport selectedId={selectedEventId} />}
