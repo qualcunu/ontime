@@ -167,45 +167,65 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
     const { externalFontSize } = getEstimatedFontSize(display, secondaryContent);
     // gather option data
     const defaultFormat = getDefaultFormat(settings?.timeFormat);
-    const backstageOptions = useMemo(
-        () => getBackstageOptions(defaultFormat, customFields, projectData),
-        [defaultFormat, customFields, projectData],
-    );
+    const backstageOptions = useMemo(() => getBackstageOptions(defaultFormat, customFields, projectData), [defaultFormat, customFields, projectData]);
     const timerOptions = useMemo(() => getTimerOptions(defaultFormat, customFields), [customFields, defaultFormat]);
     return (
         <div className={`backstage ${isMirrored ? 'mirror' : ''}`} data-testid='backstage-view'>
             <ViewParamsEditor target={OntimeView.Backstage} viewOptions={backstageOptions} />
+            <div className={cx(['blackout', message.timer.blackout && 'blackout--active'])} /> //added
+            {!hideMessage && (
+                <div className={cx(['message-overlay', showOverlay && 'message-overlay--active'])}>
+                    <FitText mode='multi' min={32} max={256} className={cx(['message', message.timer.blink && 'blink'])}>
+                        {message.timer.text}
+                    </FitText>
+                </div>
+            )}
             <div className='project-header'>
                 {projectData?.logo && <ViewLogo name={projectData.logo} className='logo' />}
                 <div className='title'>{projectData.title}</div>
                 <BackstageClock />
             </div>
-            {showProgress && <ProgressBar className='progress-container' current={time.current} duration={time.duration} />}
+            //{showProgress && <ProgressBar className='progress-container' current={time.current} duration={time.duration} />}
+            {showProgressBar && (
+                <MultiPartProgressBar
+                    className={cx(['progress-container', !isPlaying && 'progress-container--paused'])}
+                    now={time.current}
+                    complete={totalTime}
+                    normalColor={viewSettings.normalColor}
+                    warning={eventNow?.timeWarning}
+                    warningColor={viewSettings.warningColor}
+                    danger={eventNow?.timeDanger}
+                    dangerColor={viewSettings.dangerColor}
+                    hideOvertime={!showFinished} />
+            )}
+
             {!hasEvents && <Empty text={getLocalizedString('common.no_data')} className='empty-container' />}
             <div className='card-container'>
                 {showNow && (
-                    <div className={cx(['event', 'now', blinkClass && 'blink'])} style={{ backgroundColor: eventNowBgColor }}>
-                        <TitleCard title={nowMain} secondary={nowSecondary} bgColor={eventNowBgColor} color={eventNowTextColor} />
-                        <div className='timer-group'>
-                            <div className='time-entry'>
-                                <div className={cx(['time-entry__label', isPendingStart && 'time-entry--pending'])} style={{ color: eventNowTextColor }}>
-                                    {isPendingStart ? getLocalizedString('countdown.waiting') : getLocalizedString('common.started_at')}
+                    <div className={cx(['timer-container', message.timer.blink && !showOverlay && 'blink'])}>
+                        <div className={cx(['event', 'now', blinkClass && 'blink'])} style={{ backgroundColor: eventNowBgColor }}>
+                            <TitleCard title={nowMain} secondary={nowSecondary} bgColor={eventNowBgColor} color={eventNowTextColor} />
+                            <div className='timer-group'>
+                                <div className='time-entry'>
+                                    <div className={cx(['time-entry__label', isPendingStart && 'time-entry--pending'])} style={{ color: eventNowTextColor }}>
+                                        {isPendingStart ? getLocalizedString('countdown.waiting') : getLocalizedString('common.started_at')}
+                                    </div>
+                                    <SuperscriptTime time={startedAt} className='time-entry__value' style={{ color: eventNowTextColor }} />
                                 </div>
-                                <SuperscriptTime time={startedAt} className='time-entry__value' style={{ color: eventNowTextColor }} />
-                            </div>
-                            <div className='timer-gap' />
-                            <div className='time-entry' style={{ color: eventNowTextColor }}>
-                                <div className='time-entry__label' style={{ color: eventNowTextColor }}>{getLocalizedString('common.expected_finish')}</div>
-                                {isOvertime(time.current) ? (
-                                    <div className='time-entry__value' style={{ color: eventNowTextColor }}>{getLocalizedString('countdown.overtime')}</div>
-                                ) : (
-                                    <SuperscriptTime time={formatTime(time.expectedFinish)} className='time-entry__value' style={{ color: eventNowTextColor }} />
-                                )}
-                            </div>
-                            <div className='timer-gap' />
-                            <div className='time-entry' style={{ color: eventNowTextColor }}>
-                                <div className='time-entry__label' style={{ color: eventNowTextColor }}>{getLocalizedString('common.stage_timer')}</div>
-                                <div className='time-entry__value' style={{ color: eventNowTextColor }}>{displayTimer}</div>
+                                <div className='timer-gap' />
+                                <div className='time-entry' style={{ color: eventNowTextColor }}>
+                                    <div className='time-entry__label' style={{ color: eventNowTextColor }}>{getLocalizedString('common.expected_finish')}</div>
+                                    {isOvertime(time.current) ? (
+                                        <div className='time-entry__value' style={{ color: eventNowTextColor }}>{getLocalizedString('countdown.overtime')}</div>
+                                    ) : (
+                                        <SuperscriptTime time={formatTime(time.expectedFinish)} className='time-entry__value' style={{ color: eventNowTextColor }} />
+                                    )}
+                                </div>
+                                <div className='timer-gap' />
+                                <div className='time-entry' style={{ color: eventNowTextColor }}>
+                                    <div className='time-entry__label' style={{ color: eventNowTextColor }}>{getLocalizedString('common.stage_timer')}</div>
+                                    <div className='time-entry__value' style={{ color: eventNowTextColor }}>{displayTimer}</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -232,7 +252,16 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
                     <TitleCard className='event' label='next' title={nextMain} secondary={nextSecondary} color={eventNextTextColor} bgColor={eventNextBgColor} />
                 )}
             </div>
+            <div className={cx(['secondary', !secondaryContent && 'secondary--hidden'])} style={{ fontSize: `${externalFontSize}vw` }}>
+                {secondaryContent}
+            </div>
             {showSchedule && <ScheduleExport selectedId={selectedEventId} />}
+            {!hideCards && (
+                <>
+                    {showNow && <TitleCard className='event now' label='now' title={nowMain} secondary={nowSecondary} />}
+                    {showNext && <TitleCard className='event next' label='next' title={nextMain} secondary={nextSecondary} />}
+                </>
+            )}
         </div>
     );
 }
