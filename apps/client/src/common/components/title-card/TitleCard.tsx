@@ -19,8 +19,6 @@ const TitleCard = forwardRef((props: TitleCardProps, ref: ForwardedRef<HTMLDivEl
   const { getLocalizedString } = useTranslation();
 
   const accent = label === 'now';
-  console.log("It updated successfully again.")
-  console.log(props)
 
   return (
     <div className={cx(['title-card', className])} style={{backgroundColor: bgColor}} ref={ref}>
