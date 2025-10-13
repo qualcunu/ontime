@@ -41,7 +41,7 @@ import {
 import { TimerData, useTimerData } from './useTimerData';
 
 import './Backstage.scss';
-import './Timer.scss';
+// import './Timer.scss';
 
 export default function BackstageLoader() {
     const { data, status } = useBackstageData();
