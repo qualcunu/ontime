@@ -342,6 +342,58 @@
   }
 }
 
+/* =================== MOBILE ===================*/
+@media screen and (max-width: 768px) {
+  .backstage {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+
+    .project-header {
+      flex-direction: column;
+      position: relative;
+      gap: 0.5rem;
+    }
+
+    .logo img {
+      height: min(50px, 10vh);
+    }
+
+    .timer-group {
+      flex-wrap: wrap;
+    }
+
+    .clock-container {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
+    .schedule-nav-container {
+      padding-left: 0;
+      justify-content: center;
+    }
+
+    .schedule-container {
+      padding-left: 0;
+      flex: 1;
+    }
+
+    .info {
+      width: 100%;
+      text-align: right;
+    }
+
+    .qr {
+      display: none;
+    }
+
+    .info--stretch {
+      flex: 1;
+    }
+  }
+
+
 /* =================== ANIMATION ===================*/
 
 @keyframes blink {
