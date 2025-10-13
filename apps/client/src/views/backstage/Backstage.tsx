@@ -253,10 +253,10 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
                 <div className={cx(['secondary', !secondaryContent && 'secondary--hidden'])} style={{ fontSize: `${externalFontSize}vw` }}>
                     {secondaryContent}
                 </div>
-                <div className={cx(['secondary', !secondaryContent2 && 'secondary--hidden'])} style={{ fontSize: `${externalFontSize}vw` }}>
+                <div className={cx(['secondary', !secondaryContent && 'secondary--hidden'])} style={{ fontSize: `${externalFontSize}vw` }}>
                     {'Aux Timer 1:  ', auxTimer.aux1}
                 </div>
-                <div className={cx(['secondary', !secondaryContent3 && 'secondary--hidden'])} style={{ fontSize: `${externalFontSize}vw` }}>
+                <div className={cx(['secondary', !secondaryContent && 'secondary--hidden'])} style={{ fontSize: `${externalFontSize}vw` }}>
                     {'Aux Timer 2:  ', auxTimer.aux2}
                 </div>
                 <div className={cx(['secondary', !secondaryContent && 'secondary--hidden'])} style={{ fontSize: `${externalFontSize}vw` }}>
