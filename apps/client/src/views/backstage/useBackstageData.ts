@@ -1,9 +1,10 @@
-import { CustomFields, OntimeEntry, ProjectData, Settings } from 'ontime-types';
+import { CustomFields, OntimeEntry, ProjectData, Settings, ViewSettings } from 'ontime-types';
 
 import useCustomFields from '../../common/hooks-query/useCustomFields';
 import useProjectData from '../../common/hooks-query/useProjectData';
 import { useFlatRundown } from '../../common/hooks-query/useRundown';
 import useSettings from '../../common/hooks-query/useSettings';
+import useViewSettings from '../../common/hooks-query/useViewSettings';
 import { useViewOptionsStore } from '../../common/stores/viewOptions';
 import { aggregateQueryStatus, ViewData } from '../utils/viewLoader.utils';
 
@@ -13,6 +14,7 @@ export interface BackstageData {
   projectData: ProjectData;
   isMirrored: boolean;
   settings: Settings;
+  viewSettings: ViewSettings;
 }
 
 export function useBackstageData(): ViewData<BackstageData> {
@@ -22,6 +24,7 @@ export function useBackstageData(): ViewData<BackstageData> {
   // HTTP API data
   const { data: rundownData, status: rundownStatus } = useFlatRundown();
   const { data: projectData, status: projectDataStatus } = useProjectData();
+  const { data: viewSettings, status: viewSettingsStatus } = useViewSettings();
   const { data: settings, status: settingsStatus } = useSettings();
   const { data: customFields, status: customFieldsStatus } = useCustomFields();
 
@@ -32,7 +35,8 @@ export function useBackstageData(): ViewData<BackstageData> {
       projectData,
       isMirrored,
       settings,
+      viewSettings,
     },
-    status: aggregateQueryStatus([rundownStatus, projectDataStatus, settingsStatus, customFieldsStatus]),
+    status: aggregateQueryStatus([rundownStatus, projectDataStatus, viewSettingsStatus, settingsStatus, customFieldsStatus]),
   };
 }
