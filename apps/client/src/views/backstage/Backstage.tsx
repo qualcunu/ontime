@@ -201,7 +201,7 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
             {!hasEvents && <Empty text={getLocalizedString('common.no_data')} className='empty-container' />}
             <div className='card-container'>
                 {showNow && (
-                    <div className={cx(['timer-container', message.timer.blink && !showOverlay && 'blink'])} style={flex: 'unset'}>
+                    <div className={cx(['timer-container', message.timer.blink && !showOverlay && 'blink'])} style={{flex: 'unset'}}>
                         <div className={cx(['event', 'now', blinkClass && 'blink'])} style={{ backgroundColor: eventNowBgColor }}>
                             <TitleCard title={nowMain} secondary={nowSecondary} bgColor={eventNowBgColor} color={eventNowTextColor} />
                             <div className='timer-group'>
