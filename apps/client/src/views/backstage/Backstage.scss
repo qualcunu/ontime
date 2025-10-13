@@ -42,10 +42,6 @@
     gap: 1rem;
   }
 
-  .logo {
-    max-width: min(200px, 20vw);
-  }
-
   .title {
     line-height: 1.1em;
   }
@@ -70,12 +66,6 @@
 
   /* =================== MAIN - NOW ===================*/
 
-  .progress-container {
-    grid-area: progress;
-    width: 100%;
-    margin: 0 auto -8px;
-  }
-
   .card-container {
     background-color: var(--card-background-color-override, $viewer-card-bg-color);
     grid-area: card;
@@ -94,6 +84,14 @@
       animation-timing-function: ease-in-out;
       animation-iteration-count: 3;
       animation-duration: 1s;
+    }
+
+    &.now {
+      grid-area: now;
+    }
+
+    &.next {
+      grid-area: next;
     }
   }
 
@@ -191,32 +189,6 @@
       border-radius: 2px;
     }
   }
-}
-
-.stage-timer {
-  margin: 0;
-  box-sizing: border-box;
-  /* reset */
-  overflow: hidden;
-  width: 100%;
-  /* restrict the page width to viewport */
-  height: 100vh;
-  transition: opacity 0.5s ease-in-out;
-
-  font-family: var(--font-family-override, $viewer-font-family);
-  background: var(--timer-bg, var(--background-color-override, $viewer-background-color));
-  color: var(--color-override, $viewer-color);
-  gap: $view-element-gap;
-  padding: $view-outer-padding;
-
-  display: flex;
-  flex-direction: column;
-
-  &--finished {
-    outline: clamp(4px, 1vw, 16px) solid var(--timer-overtime-color-override, $timer-finished-color);
-    outline-offset: calc(clamp(4px, 1vw, 16px) * -1);
-    transition: $viewer-transition-time;
-  }
 
   .blackout {
     position: absolute;
@@ -234,16 +206,6 @@
 
   /* =================== CLOCK ===================*/
 
-  .clock-container {
-    margin-left: auto;
-    font-weight: 600;
-    transition: opacity $viewer-transition-time;
-
-    .label {
-      font-size: $timer-label-size;
-      color: var(--label-color-override, $viewer-label-color);
-      text-transform: uppercase;
-    }
 
     .clock {
       font-size: $timer-value-size;
@@ -254,22 +216,6 @@
 
     &--hidden {
       opacity: 0;
-    }
-  }
-
-  /* =================== TITLES ===================*/
-
-  .event {
-    background-color: var(--card-background-color-override, $viewer-card-bg-color);
-    padding: $view-card-padding;
-    border-radius: $element-border-radius;
-
-    &.now {
-      grid-area: now;
-    }
-
-    &.next {
-      grid-area: next;
     }
   }
 
