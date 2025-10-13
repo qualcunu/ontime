@@ -19,7 +19,7 @@ import { useWindowTitle } from '../../common/hooks/useWindowTitle';
 import { cx, timerPlaceholderMin } from '../../common/utils/styleUtils';
 import { formatTime, getDefaultFormat } from '../../common/utils/time';
 import SuperscriptTime from '../../features/viewers/common/superscript-time/SuperscriptTime';
-import { getFormattedTimer, getTimerByType } from '../../features/viewers/common/viewUtils'; 
+import { getFormattedTimer, getTimerByType } from '../../features/viewers/common/viewUtils';
 import { useTranslation } from '../../translation/TranslationProvider';
 import Loader from '../common/loader/Loader';
 import ScheduleExport from '../common/schedule/ScheduleExport';
@@ -30,13 +30,13 @@ import { BackstageData, useBackstageData } from './useBackstageData';
 
 import { getTimerOptions, useTimerOptions } from './timer.options';
 import {
-  getEstimatedFontSize,
-  getIsPlaying,
-  getSecondaryDisplay,
-  getShowClock,
-  getShowMessage,
-  getShowModifiers,
-  getTotalTime,
+    getEstimatedFontSize,
+    getIsPlaying,
+    getSecondaryDisplay,
+    getShowClock,
+    getShowMessage,
+    getShowModifiers,
+    getTotalTime,
 } from './timer.utils';
 import { TimerData, useTimerData } from './useTimerData';
 
@@ -44,238 +44,239 @@ import './Backstage.scss';
 import './Timer.scss';
 
 export default function BackstageLoader() {
-  const { data, status } = useBackstageData();
+    const { data, status } = useBackstageData();
 
-  useWindowTitle('Backstage');
+    useWindowTitle('Backstage');
 
-  if (status === 'pending') {
-    return <Loader />;
-  }
+    if (status === 'pending') {
+        return <Loader />;
+    }
 
-  if (status === 'error') {
-    return <EmptyPage text='There was an error fetching data, please refresh the page.' />;
-  }
+    if (status === 'error') {
+        return <EmptyPage text='There was an error fetching data, please refresh the page.' />;
+    }
 
-  return <Backstage {...data} />;
+    return <Backstage {...data} />;
 }
 
 function Backstage({ events, customFields, projectData, isMirrored, settings }: BackstageData) {
-  const { getLocalizedString } = useTranslation();
-  const { secondarySource, extraInfo } = useBackstageOptions();
-  const { eventNext, eventNow, rundown, selectedEventId, time } = useBackstageSocket();
-  const [blinkClass, setBlinkClass] = useState(false);
-  const { height: screenHeight } = useViewportSize();
+    const { getLocalizedString } = useTranslation();
+    const { secondarySource, extraInfo } = useBackstageOptions();
+    const { eventNext, eventNow, rundown, selectedEventId, time } = useBackstageSocket();
+    const [blinkClass, setBlinkClass] = useState(false);
+    const { height: screenHeight } = useViewportSize();
 
-  function Timer({ viewSettings }: TimerData) {
-  const { message, clock, timerTypeNow, countToEndNow, auxTimer } = useTimerSocket();
-  const {
-    hideClock,
-    hideCards,
-    hideProgress,
-    hideMessage,
-    hideSecondary,
-    hideTimerSeconds,
-    removeLeadingZeros,
-    mainSource,
-    timerType,
-    freezeOvertime,
-    freezeMessage,
-    hidePhase,
-  } = useTimerOptions();
+    function Timer({ viewSettings }: TimerData) {
+        const { message, clock, timerTypeNow, countToEndNow, auxTimer } = useTimerSocket();
+        const {
+            hideClock,
+            hideCards,
+            hideProgress,
+            hideMessage,
+            hideSecondary,
+            hideTimerSeconds,
+            removeLeadingZeros,
+            mainSource,
+            timerType,
+            freezeOvertime,
+            freezeMessage,
+            hidePhase,
+        } = useTimerOptions();
 
-  const { getLocalizedString } = useTranslation();
-  const localisedMinutes = getLocalizedString('common.minutes');
+        const { getLocalizedString } = useTranslation();
+        const localisedMinutes = getLocalizedString('common.minutes');
 
-  // gather modifiers
-  const viewTimerType = timerType ?? timerTypeNow;
-  const showOverlay = getShowMessage(message.timer);
-  const { showFinished } = getShowModifiers(
-    timerTypeNow,
-    countToEndNow,
-    time.phase,
-    freezeOvertime,
-    freezeMessage,
-    hidePhase,
-  );
-  const isPlaying = getIsPlaying(time.playback);
-  const showClock = !hideClock && getShowClock(viewTimerType);
-  const showProgressBar = !hideProgress && getShowProgressBar(viewTimerType);
+        // gather modifiers
+        const viewTimerType = timerType ?? timerTypeNow;
+        const showOverlay = getShowMessage(message.timer);
+        const { showFinished } = getShowModifiers(
+            timerTypeNow,
+            countToEndNow,
+            time.phase,
+            freezeOvertime,
+            freezeMessage,
+            hidePhase,
+        );
+        const isPlaying = getIsPlaying(time.playback);
+        const showClock = !hideClock && getShowClock(viewTimerType);
+        const showProgressBar = !hideProgress && getShowProgressBar(viewTimerType);
 
 
-  // blink on change
-  useEffect(() => {
-    setBlinkClass(false);
+        // blink on change
+        useEffect(() => {
+            setBlinkClass(false);
 
-    const timer = setTimeout(() => {
-      setBlinkClass(true);
-    }, 10);
+            const timer = setTimeout(() => {
+                setBlinkClass(true);
+            }, 10);
 
-    return () => clearTimeout(timer);
-  }, [selectedEventId]);
+            return () => clearTimeout(timer);
+        }, [selectedEventId]);
 
-  // gather card data
-  const hasEvents = events.length > 0;
-  const { showNow, nowMain, nowSecondary, showNext, nextMain, nextSecondary, eventNowBgColor, eventNextBgColor, eventNowTextColor, eventNextTextColor} = getCardData(
-    eventNow,
-    eventNext,
-    'title',
-    mainSource,
-    secondarySource,
-    time.playback,
-    time.phase,
-  );
+        // gather card data
+        const hasEvents = events.length > 0;
+        const { showNow, nowMain, nowSecondary, showNext, nextMain, nextSecondary, eventNowBgColor, eventNextBgColor, eventNowTextColor, eventNextTextColor } = getCardData(
+            eventNow,
+            eventNext,
+            'title',
+            mainSource,
+            secondarySource,
+            time.playback,
+            time.phase,
+        );
 
-  // gather timer data
-  const isPendingStart = getIsPendingStart(time.playback, time.phase);
-  const startedAt = isPendingStart ? formatTime(time.secondaryTimer) : formatTime(time.startedAt);
+        // gather timer data
+        const isPendingStart = getIsPendingStart(time.playback, time.phase);
+        const startedAt = isPendingStart ? formatTime(time.secondaryTimer) : formatTime(time.startedAt);
 
-  const scheduledStart = (() => {
-    if (showNow) return undefined;
-    if (!hasEvents) return undefined;
-    return formatTime(rundown.plannedStart, { format12: 'hh:mm a', format24: 'HH:mm' });
-  })();
+        const scheduledStart = (() => {
+            if (showNow) return undefined;
+            if (!hasEvents) return undefined;
+            return formatTime(rundown.plannedStart, { format12: 'hh:mm a', format24: 'HH:mm' });
+        })();
 
-  const scheduledEnd = (() => {
-    if (showNow) return undefined;
-    if (!hasEvents) return undefined;
-    return formatTime(rundown.plannedEnd, { format12: 'hh:mm a', format24: 'HH:mm' });
-  })();
+        const scheduledEnd = (() => {
+            if (showNow) return undefined;
+            if (!hasEvents) return undefined;
+            return formatTime(rundown.plannedEnd, { format12: 'hh:mm a', format24: 'HH:mm' });
+        })();
 
-  let displayTimer = millisToString(time.current, { fallback: timerPlaceholderMin });
-  displayTimer = removeLeadingZero(displayTimer);
+        let displayTimer = millisToString(time.current, { fallback: timerPlaceholderMin });
+        displayTimer = removeLeadingZero(displayTimer);
 
-  // gather timer's timer data
+        // gather timer's timer data
 
-  const totalTime = getTotalTime(time.duration, time.addedTime);
-  const formattedClock = formatTime(clock);
-  const stageTimer = getTimerByType(freezeOvertime, timerTypeNow, countToEndNow, clock, time, timerType);
-  const display = getFormattedTimer(stageTimer, viewTimerType, localisedMinutes, {
-    removeSeconds: hideTimerSeconds,
-    removeLeadingZero: removeLeadingZeros,
-  });
+        const totalTime = getTotalTime(time.duration, time.addedTime);
+        const formattedClock = formatTime(clock);
+        const stageTimer = getTimerByType(freezeOvertime, timerTypeNow, countToEndNow, clock, time, timerType);
+        const display = getFormattedTimer(stageTimer, viewTimerType, localisedMinutes, {
+            removeSeconds: hideTimerSeconds,
+            removeLeadingZero: removeLeadingZeros,
+        });
 
-  const currentAux = (() => {
-    if (message.timer.secondarySource === 'aux1') {
-      return auxTimer.aux1;
-    }
-    if (message.timer.secondarySource === 'aux2') {
-      return auxTimer.aux2;
-    }
-    if (message.timer.secondarySource === 'aux3') {
-      return auxTimer.aux3;
-    }
-    return null;
-  })();
+        const currentAux = (() => {
+            if (message.timer.secondarySource === 'aux1') {
+                return auxTimer.aux1;
+            }
+            if (message.timer.secondarySource === 'aux2') {
+                return auxTimer.aux2;
+            }
+            if (message.timer.secondarySource === 'aux3') {
+                return auxTimer.aux3;
+            }
+            return null;
+        })();
 
-  const secondaryContent = getSecondaryDisplay(
-    message,
-    currentAux,
-    localisedMinutes,
-    hideTimerSeconds,
-    removeLeadingZeros,
-    hideSecondary,
-  );
+        const secondaryContent = getSecondaryDisplay(
+            message,
+            currentAux,
+            localisedMinutes,
+            hideTimerSeconds,
+            removeLeadingZeros,
+            hideSecondary,
+        );
 
-  // gather presentation styles
-  const qrSize = Math.max(window.innerWidth / 15, 72);
-  const showProgress = getShowProgressBar(time.playback);
-  const showSchedule = hasEvents && screenHeight > 420; // in vertical screens we may not have space
-  const showPending = scheduledStart && scheduledEnd;
+        // gather presentation styles
+        const qrSize = Math.max(window.innerWidth / 15, 72);
+        const showProgress = getShowProgressBar(time.playback);
+        const showSchedule = hasEvents && screenHeight > 420; // in vertical screens we may not have space
+        const showPending = scheduledStart && scheduledEnd;
 
-  const { externalFontSize } = getEstimatedFontSize(display, secondaryContent);
+        const { externalFontSize } = getEstimatedFontSize(display, secondaryContent);
 
-  // gather option data
-  const defaultFormat = getDefaultFormat(settings?.timeFormat);
-  const backstageOptions = useMemo(
-    () => getBackstageOptions(defaultFormat, customFields, projectData),
-    [defaultFormat, customFields, projectData],
-  );
+        // gather option data
+        const defaultFormat = getDefaultFormat(settings?.timeFormat);
+        const backstageOptions = useMemo(
+            () => getBackstageOptions(defaultFormat, customFields, projectData),
+            [defaultFormat, customFields, projectData],
+        );
 
-  const timerOptions = useMemo(() => getTimerOptions(defaultFormat, customFields), [customFields, defaultFormat]);
+        const timerOptions = useMemo(() => getTimerOptions(defaultFormat, customFields), [customFields, defaultFormat]);
 
-  return (
-    <div className={`backstage ${isMirrored ? 'mirror' : ''}`} data-testid='backstage-view'>
-      <ViewParamsEditor target={OntimeView.Backstage} viewOptions={backstageOptions} />
-      <div className='project-header'>
-        {projectData?.logo && <ViewLogo name={projectData.logo} className='logo' />}
-        <div className='title'>{projectData.title}</div>
-        <BackstageClock />
-      </div>
-
-      {showProgress && <ProgressBar className='progress-container' current={time.current} duration={time.duration} />}
-
-      {!hasEvents && <Empty text={getLocalizedString('common.no_data')} className='empty-container' />}
-
-      <div className='card-container'>
-        {showNow && (
-          <div className={cx(['event', 'now', blinkClass && 'blink'])} style={{backgroundColor: eventNowBgColor }}>
-            <TitleCard title={nowMain} secondary={nowSecondary} bgColor={eventNowBgColor} color={eventNowTextColor}/>
-            <div className='timer-group'>
-              <div className='time-entry'>
-                <div className={cx(['time-entry__label', isPendingStart && 'time-entry--pending'])} style={{color: eventNowTextColor }}>
-                  {isPendingStart ? getLocalizedString('countdown.waiting') : getLocalizedString('common.started_at')}
+        return (
+            <div className={`backstage ${isMirrored ? 'mirror' : ''}`} data-testid='backstage-view'>
+                <ViewParamsEditor target={OntimeView.Backstage} viewOptions={backstageOptions} />
+                <div className='project-header'>
+                    {projectData?.logo && <ViewLogo name={projectData.logo} className='logo' />}
+                    <div className='title'>{projectData.title}</div>
+                    <BackstageClock />
                 </div>
-                <SuperscriptTime time={startedAt} className='time-entry__value' style={{color: eventNowTextColor}}/>
-              </div>
-              <div className='timer-gap'/>
-              <div className='time-entry' style={{color: eventNowTextColor }}>
-                <div className='time-entry__label' style={{color: eventNowTextColor }}>{getLocalizedString('common.expected_finish')}</div>
-                {isOvertime(time.current) ? (
-                  <div className='time-entry__value' style={{color: eventNowTextColor }}>{getLocalizedString('countdown.overtime')}</div>
-                ) : (
-                  <SuperscriptTime time={formatTime(time.expectedFinish)} className='time-entry__value' style={{color: eventNowTextColor }}/>
-                )}
-              </div>
-              <div className='timer-gap' />
-              <div className='time-entry' style={{color: eventNowTextColor }}>
-                <div className='time-entry__label' style={{color: eventNowTextColor }}>{getLocalizedString('common.stage_timer')}</div>
-                <div className='time-entry__value' style={{color: eventNowTextColor }}>{displayTimer}</div>
-              </div>
-            </div>
-          </div>
-        )}
 
-        {showPending && (
-          <div className='event'>
-            <div className='title-card__placeholder' style={{color: eventNowTextColor }}>{getLocalizedString('countdown.waiting')}</div>
-            <div className='timer-group'>
-              <div className='time-entry'>
-                <div className={cx(['time-entry__label', isPendingStart && 'time-entry--pending'])} style={{color: eventNowTextColor }}>
-                  {getLocalizedString('common.scheduled_start')}
+                {showProgress && <ProgressBar className='progress-container' current={time.current} duration={time.duration} />}
+
+                {!hasEvents && <Empty text={getLocalizedString('common.no_data')} className='empty-container' />}
+
+                <div className='card-container'>
+                    {showNow && (
+                        <div className={cx(['event', 'now', blinkClass && 'blink'])} style={{ backgroundColor: eventNowBgColor }}>
+                            <TitleCard title={nowMain} secondary={nowSecondary} bgColor={eventNowBgColor} color={eventNowTextColor} />
+                            <div className='timer-group'>
+                                <div className='time-entry'>
+                                    <div className={cx(['time-entry__label', isPendingStart && 'time-entry--pending'])} style={{ color: eventNowTextColor }}>
+                                        {isPendingStart ? getLocalizedString('countdown.waiting') : getLocalizedString('common.started_at')}
+                                    </div>
+                                    <SuperscriptTime time={startedAt} className='time-entry__value' style={{ color: eventNowTextColor }} />
+                                </div>
+                                <div className='timer-gap' />
+                                <div className='time-entry' style={{ color: eventNowTextColor }}>
+                                    <div className='time-entry__label' style={{ color: eventNowTextColor }}>{getLocalizedString('common.expected_finish')}</div>
+                                    {isOvertime(time.current) ? (
+                                        <div className='time-entry__value' style={{ color: eventNowTextColor }}>{getLocalizedString('countdown.overtime')}</div>
+                                    ) : (
+                                        <SuperscriptTime time={formatTime(time.expectedFinish)} className='time-entry__value' style={{ color: eventNowTextColor }} />
+                                    )}
+                                </div>
+                                <div className='timer-gap' />
+                                <div className='time-entry' style={{ color: eventNowTextColor }}>
+                                    <div className='time-entry__label' style={{ color: eventNowTextColor }}>{getLocalizedString('common.stage_timer')}</div>
+                                    <div className='time-entry__value' style={{ color: eventNowTextColor }}>{displayTimer}</div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {showPending && (
+                        <div className='event'>
+                            <div className='title-card__placeholder' style={{ color: eventNowTextColor }}>{getLocalizedString('countdown.waiting')}</div>
+                            <div className='timer-group'>
+                                <div className='time-entry'>
+                                    <div className={cx(['time-entry__label', isPendingStart && 'time-entry--pending'])} style={{ color: eventNowTextColor }}>
+                                        {getLocalizedString('common.scheduled_start')}
+                                    </div>
+                                    <SuperscriptTime time={scheduledStart} className='time-entry__value' style={{ color: eventNowTextColor }} />
+                                </div>
+                                <div className='timer-gap' />
+                                <div className='time-entry'>
+                                    <div className='time-entry__label' style={{ color: eventNowTextColor }}>{getLocalizedString('common.scheduled_end')}</div>
+                                    <SuperscriptTime time={scheduledEnd} className='time-entry__value' style={{ color: eventNowTextColor }} />
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {showNext && hasEvents && (
+                        <TitleCard className='event' label='next' title={nextMain} secondary={nextSecondary} color={eventNextTextColor} bgColor={eventNextBgColor} />
+                    )}
                 </div>
-                <SuperscriptTime time={scheduledStart} className='time-entry__value' style={{color: eventNowTextColor }}/>
-              </div>
-              <div className='timer-gap' />
-              <div className='time-entry'>
-                <div className='time-entry__label' style={{color: eventNowTextColor }}>{getLocalizedString('common.scheduled_end')}</div>
-                <SuperscriptTime time={scheduledEnd} className='time-entry__value' style={{color: eventNowTextColor }}/>
-              </div>
+
+                {showSchedule && <ScheduleExport selectedId={selectedEventId} />}
+
             </div>
-          </div>
-        )}
+        );
+    }
 
-        {showNext && hasEvents && (
-          <TitleCard className='event' label='next' title={nextMain} secondary={nextSecondary} color={eventNextTextColor} bgColor={eventNextBgColor}/>
-        )}
-      </div>
+    function BackstageClock() {
+        const { getLocalizedString } = useTranslation();
+        const { clock } = useClock();
 
-      {showSchedule && <ScheduleExport selectedId={selectedEventId} />}
-      
-    </div>
-  );
-}
+        // gather timer data
+        const formattedClock = formatTime(clock);
 
-function BackstageClock() {
-  const { getLocalizedString } = useTranslation();
-  const { clock } = useClock();
-
-  // gather timer data
-  const formattedClock = formatTime(clock);
-
-  return (
-    <div className='clock-container'>
-      <div className='label'>{getLocalizedString('common.time_now')}</div>
-      <SuperscriptTime time={formattedClock} className='time' />
-    </div>
-  );
+        return (
+            <div className='clock-container'>
+                <div className='label'>{getLocalizedString('common.time_now')}</div>
+                <SuperscriptTime time={formattedClock} className='time' />
+            </div>
+        );
+    }
 }
