@@ -4,6 +4,9 @@ import { useViewportSize } from '@mantine/hooks';
 import { OntimeView, ProjectData } from 'ontime-types';
 import { millisToString, removeLeadingZero } from 'ontime-utils';
 
+import { FitText } from '../../common/components/fit-text/FitText';
+import MultiPartProgressBar from '../../common/components/multi-part-progress-bar/MultiPartProgressBar';
+
 import ProgressBar from '../../common/components/progress-bar/ProgressBar';
 import Empty from '../../common/components/state/Empty';
 import EmptyPage from '../../common/components/state/EmptyPage';
@@ -11,10 +14,12 @@ import TitleCard from '../../common/components/title-card/TitleCard';
 import ViewLogo from '../../common/components/view-logo/ViewLogo';
 import ViewParamsEditor from '../../common/components/view-params-editor/ViewParamsEditor';
 import { useBackstageSocket, useClock } from '../../common/hooks/useSocket';
+import { useTimerSocket } from '../../common/hooks/useSocket';
 import { useWindowTitle } from '../../common/hooks/useWindowTitle';
 import { cx, timerPlaceholderMin } from '../../common/utils/styleUtils';
 import { formatTime, getDefaultFormat } from '../../common/utils/time';
 import SuperscriptTime from '../../features/viewers/common/superscript-time/SuperscriptTime';
+import { getFormattedTimer, getTimerByType } from '../../features/viewers/common/viewUtils'; 
 import { useTranslation } from '../../translation/TranslationProvider';
 import Loader from '../common/loader/Loader';
 import ScheduleExport from '../common/schedule/ScheduleExport';
@@ -23,7 +28,20 @@ import { getBackstageOptions, useBackstageOptions } from './backstage.options';
 import { getCardData, getIsPendingStart, getShowProgressBar, isOvertime } from './backstage.utils';
 import { BackstageData, useBackstageData } from './useBackstageData';
 
+import { getTimerOptions, useTimerOptions } from './timer.options';
+import {
+  getEstimatedFontSize,
+  getIsPlaying,
+  getSecondaryDisplay,
+  getShowClock,
+  getShowMessage,
+  getShowModifiers,
+  getTotalTime,
+} from './timer.utils';
+import { TimerData, useTimerData } from './useTimerData';
+
 import './Backstage.scss';
+import './Timer.scss';
 
 export default function BackstageLoader() {
   const { data, status } = useBackstageData();
@@ -48,6 +66,42 @@ function Backstage({ events, customFields, projectData, isMirrored, settings }: 
   const [blinkClass, setBlinkClass] = useState(false);
   const { height: screenHeight } = useViewportSize();
 
+  function Timer({ viewSettings }: TimerData) {
+  const { message, clock, timerTypeNow, countToEndNow, auxTimer } = useTimerSocket();
+  const {
+    hideClock,
+    hideCards,
+    hideProgress,
+    hideMessage,
+    hideSecondary,
+    hideTimerSeconds,
+    removeLeadingZeros,
+    mainSource,
+    timerType,
+    freezeOvertime,
+    freezeMessage,
+    hidePhase,
+  } = useTimerOptions();
+
+  const { getLocalizedString } = useTranslation();
+  const localisedMinutes = getLocalizedString('common.minutes');
+
+  // gather modifiers
+  const viewTimerType = timerType ?? timerTypeNow;
+  const showOverlay = getShowMessage(message.timer);
+  const { showFinished } = getShowModifiers(
+    timerTypeNow,
+    countToEndNow,
+    time.phase,
+    freezeOvertime,
+    freezeMessage,
+    hidePhase,
+  );
+  const isPlaying = getIsPlaying(time.playback);
+  const showClock = !hideClock && getShowClock(viewTimerType);
+  const showProgressBar = !hideProgress && getShowProgressBar(viewTimerType);
+
+
   // blink on change
   useEffect(() => {
     setBlinkClass(false);
@@ -65,8 +119,10 @@ function Backstage({ events, customFields, projectData, isMirrored, settings }: 
     eventNow,
     eventNext,
     'title',
+    mainSource,
     secondarySource,
     time.playback,
+    time.phase,
   );
 
   // gather timer data
@@ -88,11 +144,45 @@ function Backstage({ events, customFields, projectData, isMirrored, settings }: 
   let displayTimer = millisToString(time.current, { fallback: timerPlaceholderMin });
   displayTimer = removeLeadingZero(displayTimer);
 
+  // gather timer's timer data
+
+  const totalTime = getTotalTime(time.duration, time.addedTime);
+  const formattedClock = formatTime(clock);
+  const stageTimer = getTimerByType(freezeOvertime, timerTypeNow, countToEndNow, clock, time, timerType);
+  const display = getFormattedTimer(stageTimer, viewTimerType, localisedMinutes, {
+    removeSeconds: hideTimerSeconds,
+    removeLeadingZero: removeLeadingZeros,
+  });
+
+  const currentAux = (() => {
+    if (message.timer.secondarySource === 'aux1') {
+      return auxTimer.aux1;
+    }
+    if (message.timer.secondarySource === 'aux2') {
+      return auxTimer.aux2;
+    }
+    if (message.timer.secondarySource === 'aux3') {
+      return auxTimer.aux3;
+    }
+    return null;
+  })();
+
+  const secondaryContent = getSecondaryDisplay(
+    message,
+    currentAux,
+    localisedMinutes,
+    hideTimerSeconds,
+    removeLeadingZeros,
+    hideSecondary,
+  );
+
   // gather presentation styles
   const qrSize = Math.max(window.innerWidth / 15, 72);
   const showProgress = getShowProgressBar(time.playback);
   const showSchedule = hasEvents && screenHeight > 420; // in vertical screens we may not have space
   const showPending = scheduledStart && scheduledEnd;
+
+  const { externalFontSize } = getEstimatedFontSize(display, secondaryContent);
 
   // gather option data
   const defaultFormat = getDefaultFormat(settings?.timeFormat);
@@ -100,6 +190,8 @@ function Backstage({ events, customFields, projectData, isMirrored, settings }: 
     () => getBackstageOptions(defaultFormat, customFields, projectData),
     [defaultFormat, customFields, projectData],
   );
+
+  const timerOptions = useMemo(() => getTimerOptions(defaultFormat, customFields), [customFields, defaultFormat]);
 
   return (
     <div className={`backstage ${isMirrored ? 'mirror' : ''}`} data-testid='backstage-view'>
