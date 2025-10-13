@@ -36,7 +36,7 @@ export const getBackstageOptions = (
           description: 'Select the data source for auxiliary text shown in now and next cards',
           type: 'option',
           values: secondaryOptions,
-          defaultValue: 'none',
+          defaultValue: 'note',
         },
       ],
     },
