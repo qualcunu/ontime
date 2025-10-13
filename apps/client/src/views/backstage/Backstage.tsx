@@ -61,14 +61,12 @@ function Backstage({ events, customFields, projectData, isMirrored, settings }: 
 
   // gather card data
   const hasEvents = events.length > 0;
-  const { showNow, nowMain, nowSecondary, showNext, nextMain, nextSecondary, lucc, mucc, nucc, qucc} = getCardData(
+  const { showNow, nowMain, nowSecondary, showNext, nextMain, nextSecondary, eventNowBgColor, eventNextBgColor, eventNowTextColor, eventNextTextColor} = getCardData(
     eventNow,
     eventNext,
     'title',
     secondarySource,
     time.playback,
-    'colour',
-    'custom',
   );
 
   // gather timer data
@@ -118,28 +116,28 @@ function Backstage({ events, customFields, projectData, isMirrored, settings }: 
 
       <div className='card-container'>
         {showNow && (
-          <div className={cx(['event', 'now', blinkClass && 'blink'])} style={{backgroundColor: lucc }}>
-            <TitleCard title={nowMain} secondary={nowSecondary} lel={nucc}/>
+          <div className={cx(['event', 'now', blinkClass && 'blink'])} style={{backgroundColor: eventNowBgColor }}>
+            <TitleCard title={nowMain} secondary={nowSecondary} bgColor={eventNowBgColor} color={eventNowTextColor}/>
             <div className='timer-group'>
               <div className='time-entry'>
-                <div className={cx(['time-entry__label', isPendingStart && 'time-entry--pending'])} style={{nucc}}>
+                <div className={cx(['time-entry__label', isPendingStart && 'time-entry--pending'])} style={{color: eventNowTextColor }}>
                   {isPendingStart ? getLocalizedString('countdown.waiting') : getLocalizedString('common.started_at')}
                 </div>
-                <SuperscriptTime time={startedAt} className='time-entry__value' style={{nucc}}/>
+                <SuperscriptTime time={startedAt} className='time-entry__value' style={{color: eventNowTextColor}}/>
               </div>
               <div className='timer-gap'/>
-              <div className='time-entry' style={{nucc}}>
-                <div className='time-entry__label' style={{nucc}}>{getLocalizedString('common.expected_finish')}</div>
+              <div className='time-entry' style={{color: eventNowTextColor }}>
+                <div className='time-entry__label' style={{color: eventNowTextColor }}>{getLocalizedString('common.expected_finish')}</div>
                 {isOvertime(time.current) ? (
-                  <div className='time-entry__value' style={{nucc}}>{getLocalizedString('countdown.overtime')}</div>
+                  <div className='time-entry__value' style={{color: eventNowTextColor }}>{getLocalizedString('countdown.overtime')}</div>
                 ) : (
-                  <SuperscriptTime time={formatTime(time.expectedFinish)} className='time-entry__value' style={{nucc}}/>
+                  <SuperscriptTime time={formatTime(time.expectedFinish)} className='time-entry__value' style={{color: eventNowTextColor }}/>
                 )}
               </div>
               <div className='timer-gap' />
-              <div className='time-entry' style={{nucc}}>
-                <div className='time-entry__label' style={{nucc}}>{getLocalizedString('common.stage_timer')}</div>
-                <div className='time-entry__value' style={{nucc}}>{displayTimer}</div>
+              <div className='time-entry' style={{color: eventNowTextColor }}>
+                <div className='time-entry__label' style={{color: eventNowTextColor }}>{getLocalizedString('common.stage_timer')}</div>
+                <div className='time-entry__value' style={{color: eventNowTextColor }}>{displayTimer}</div>
               </div>
             </div>
           </div>
@@ -147,25 +145,25 @@ function Backstage({ events, customFields, projectData, isMirrored, settings }: 
 
         {showPending && (
           <div className='event'>
-            <div className='title-card__placeholder' style={{nucc}}>{getLocalizedString('countdown.waiting')}</div>
+            <div className='title-card__placeholder' style={{color: eventNowTextColor }}>{getLocalizedString('countdown.waiting')}</div>
             <div className='timer-group'>
               <div className='time-entry'>
-                <div className={cx(['time-entry__label', isPendingStart && 'time-entry--pending'])} style={{nucc}}>
+                <div className={cx(['time-entry__label', isPendingStart && 'time-entry--pending'])} style={{color: eventNowTextColor }}>
                   {getLocalizedString('common.scheduled_start')}
                 </div>
-                <SuperscriptTime time={scheduledStart} className='time-entry__value' style={{nucc}}/>
+                <SuperscriptTime time={scheduledStart} className='time-entry__value' style={{color: eventNowTextColor }}/>
               </div>
               <div className='timer-gap' />
               <div className='time-entry'>
-                <div className='time-entry__label' style={{nucc}}>{getLocalizedString('common.scheduled_end')}</div>
-                <SuperscriptTime time={scheduledEnd} className='time-entry__value' style={{nucc}}/>
+                <div className='time-entry__label' style={{color: eventNowTextColor }}>{getLocalizedString('common.scheduled_end')}</div>
+                <SuperscriptTime time={scheduledEnd} className='time-entry__value' style={{color: eventNowTextColor }}/>
               </div>
             </div>
           </div>
         )}
 
         {showNext && hasEvents && (
-          <TitleCard className='event' label='next' title={nextMain} secondary={nextSecondary} lawl={mucc} lawl={qucc}/>
+          <TitleCard className='event' label='next' title={nextMain} secondary={nextSecondary} color={eventNextTextColor} bgColor={eventNextBgColor}/>
         )}
       </div>
 
