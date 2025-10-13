@@ -171,11 +171,11 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
     const timerOptions = useMemo(() => getTimerOptions(defaultFormat, customFields), [customFields, defaultFormat]);
     return (
         <div className={`backstage ${isMirrored ? 'mirror' : ''}`} data-testid='backstage-view'>
-            <div className={cx(['stage-timer blackout', message.timer.blackout && 'blackout--active'])} />
+            <div className={cx(['blackout', message.timer.blackout && 'blackout--active'])} />
             <ViewParamsEditor target={OntimeView.Backstage} viewOptions={backstageOptions} />
             {!hideMessage && (
-                <div className={cx(['stage-timer message-overlay', showOverlay && 'stage-timer message-overlay--active'])}>
-                    <FitText mode='multi' min={32} max={256} className={cx(['stage-timer message', message.timer.blink && 'blink'])}>
+                <div className={cx(['message-overlay', showOverlay && 'message-overlay--active'])}>
+                    <FitText mode='multi' min={32} max={256} className={cx(['message', message.timer.blink && 'blink'])}>
                         {message.timer.text}
                     </FitText>
                 </div>
@@ -187,7 +187,7 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
             </div>
             {showProgressBar && (
                 <MultiPartProgressBar
-                    className={cx(['stage-timer progress-container', !isPlaying && 'stage-timer progress-container--paused'])}
+                    className={cx(['progress-container', !isPlaying && 'progress-container--paused'])}
                     now={time.current}
                     complete={totalTime}
                     normalColor={viewSettings.normalColor}
@@ -250,11 +250,11 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
                 {showNext && hasEvents && (
                     <TitleCard className='event' label='next' title={nextMain} secondary={nextSecondary} color={eventNextTextColor} bgColor={eventNextBgColor} />
                 )}
-                <div className={cx(['stage-timer secondary', !secondaryContent && 'stage-timer secondary--hidden'])} style={{ fontSize: `${externalFontSize}vw` }}>
-                {secondaryContent}
+                <div className={cx(['secondary', !secondaryContent && 'secondary--hidden'])} style={{ fontSize: `${externalFontSize}vw` }}>
+                    {secondaryContent}
+                </div>
             </div>
-            </div>
-            
+
             {showSchedule && <ScheduleExport selectedId={selectedEventId} />}
         </div>
     );
