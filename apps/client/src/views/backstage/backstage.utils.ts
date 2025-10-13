@@ -33,10 +33,6 @@ export function getCardData(
   mainSource: keyof OntimeEvent | null,
   secondarySource: keyof OntimeEvent | null,
   playback: Playback,
-  succ: OntimeEvent | null,
-  cucc: OntimeEvent | null,
-  vucc: OntimeEvent | null,
-  rucc: OntimeEvent | null,
 ) {
   if (playback === Playback.Stop) {
     return {
@@ -46,10 +42,10 @@ export function getCardData(
       showNext: false,
       nextMain: undefined,
       nextSecondary: undefined,
-      lucc: false,
-      mucc: false,
-      nucc: undefined,
-      qucc: undefined,
+      eventNowBgColor: undefined,
+      eventNextBgColor: undefined,
+      eventNowTextColor: undefined,
+      eventNextTextColor: undefined,
     };
   }
 
@@ -58,12 +54,11 @@ export function getCardData(
   const nowSecondary = getPropertyValue(eventNow, secondarySource);
   const nextMain = getPropertyValue(eventNext, mainSource ?? 'title') || enDash;
   const nextSecondary = getPropertyValue(eventNext, secondarySource);
-  const lucc = getPropertyValue(eventNow, succ ?? 'colour');
-  const mucc = getPropertyValue(eventNext, cucc ?? 'colour');
-  const nucc = getPropertyValue(eventNow, vucc ?? 'custom.color');
-  const qucc = getPropertyValue(eventNext, rucc ?? 'custom.color');
+  const eventNowBgColor = getPropertyValue(eventNow, 'colour');
+  const eventNextBgColor = getPropertyValue(eventNext, 'colour');
+  const eventNowTextColor = eventNow?.custom?.Color;
+  const eventNextTextColor = eventNext?.custom?.Color;
 
-  
   return {
     showNow: eventNow !== null,
     nowMain,
@@ -71,9 +66,9 @@ export function getCardData(
     showNext: eventNext !== null,
     nextMain,
     nextSecondary,
-    lucc,
-    mucc,
-    nucc,
-    qucc,
+    eventNowBgColor,
+    eventNextBgColor,
+    eventNowTextColor,
+    eventNextTextColor,
   };
 }
