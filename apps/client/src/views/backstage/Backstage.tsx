@@ -41,7 +41,7 @@ import {
 import { TimerData, useTimerData } from './useTimerData';
 
 import './Backstage.scss';
-import './Timer.scss';
+//import './Timer.scss';
 
 export default function BackstageLoader() {
     const { data, status } = useBackstageData();
@@ -172,7 +172,7 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
     return (
         <div className={`backstage ${isMirrored ? 'mirror' : ''}`} data-testid='backstage-view'>
             <ViewParamsEditor target={OntimeView.Backstage} viewOptions={backstageOptions} />
-            <div className={cx(['blackout', message.timer.blackout && 'blackout--active'])} /> //added
+            <div className={cx(['blackout', message.timer.blackout && 'blackout--active'])} />
             {!hideMessage && (
                 <div className={cx(['message-overlay', showOverlay && 'message-overlay--active'])}>
                     <FitText mode='multi' min={32} max={256} className={cx(['message', message.timer.blink && 'blink'])}>
@@ -185,7 +185,6 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
                 <div className='title'>{projectData.title}</div>
                 <BackstageClock />
             </div>
-            //{showProgress && <ProgressBar className='progress-container' current={time.current} duration={time.duration} />}
             {showProgressBar && (
                 <MultiPartProgressBar
                     className={cx(['progress-container', !isPlaying && 'progress-container--paused'])}
@@ -256,12 +255,6 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
                 {secondaryContent}
             </div>
             {showSchedule && <ScheduleExport selectedId={selectedEventId} />}
-            {!hideCards && (
-                <>
-                    {showNow && <TitleCard className='event now' label='now' title={nowMain} secondary={nowSecondary} />}
-                    {showNext && <TitleCard className='event next' label='next' title={nextMain} secondary={nextSecondary} />}
-                </>
-            )}
         </div>
     );
 }
