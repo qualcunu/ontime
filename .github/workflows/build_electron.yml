@@ -24,7 +24,7 @@ jobs:
         run: pnpm build
 
       - name: Electron - Build app
-        run: pnpm dev:electron
+        run: pnpm dist-win
 
       - name: Release
         uses: softprops/action-gh-release@v1
