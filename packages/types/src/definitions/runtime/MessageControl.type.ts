@@ -11,4 +11,7 @@ export type TimerMessage = {
 export type MessageState = {
   timer: TimerMessage;
   secondary: string;
+  aux1label: string;
+  aux2label: string;
+  aux3label: string;
 };
