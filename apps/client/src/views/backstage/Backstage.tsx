@@ -291,7 +291,7 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
                 </div>
             </div>
 
-            {showSchedule && <ScheduleExport selectedId={selectedEventId} style={{left: '146%', text-overflow: 'ellipsis'}}/>}
+            {showSchedule && <ScheduleExport selectedId={selectedEventId} style={{left: '146%', textOverflow: 'ellipsis'}}/>}
         </div>
     );
 }
