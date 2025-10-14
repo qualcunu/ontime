@@ -171,7 +171,7 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
     const uga3 = getFormattedTimer(auxTimer.aux3, TimerType.CountDown, localisedMinutes, {});
 
     function Aux_pbk(auxNumber){
-        const { playback, direction } = useAuTimerControl(auxNumber);
+        const { playback, direction } = useAuxTimerControl(auxNumber);
 
         const isActive = playback !== SimplePlayback.Stop;
         
