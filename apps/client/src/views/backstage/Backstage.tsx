@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import QRCode from 'react-qr-code';
 import { useViewportSize } from '@mantine/hooks';
-import { OntimeView, ProjectData } from 'ontime-types';
+import { OntimeView, ProjectData, TimerType } from 'ontime-types';
 import { millisToString, removeLeadingZero } from 'ontime-utils';
 
 import { FitText } from '../../common/components/fit-text/FitText';
@@ -25,7 +25,6 @@ import { getFormattedTimer, getTimerByType } from '../../features/viewers/common
 import { useTranslation } from '../../translation/TranslationProvider';
 import Loader from '../common/loader/Loader';
 import ScheduleExport from '../common/schedule/ScheduleExport';
-import { getFormattedTimer } from '../../features/viewers/common/viewUtils';
 
 import { getBackstageOptions, useBackstageOptions } from './backstage.options';
 import { getCardData, getIsPendingStart, getShowProgressBar, isOvertime } from './backstage.utils';
