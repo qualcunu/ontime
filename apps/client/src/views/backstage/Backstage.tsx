@@ -175,16 +175,12 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
 
         const isActive = playback !== SimplePlayback.Stop;
         
-        console.log(isActive, " ", playback, " ", direction);
-        
-        return(isActive, playback, direction);
+        return(isActive);
     }
     // const Aux1_isActive = Aux1_pbk !== SimplePlayback.Stop;
     // const Aux2_isActive = Aux2_pbk !== SimplePlayback.Stop;
     // const Aux3_isActive = Aux3_pbk !== SimplePlayback.Stop;
-    Aux_pbk(1);
-    Aux_pbk(2);
-    Aux_pbk(3);
+    
 
     
     // gather presentation styles
@@ -210,7 +206,7 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
             )}
             <div className='project-header'>
                 {projectData?.logo && <ViewLogo name={projectData.logo} className='logo' />}
-                <QRCode size={100} value={url} className={style.qrCode} />
+                <QRCode size={130} value={url} className={style.qrCode} />
                 <div className='title'>{projectData.title}</div>
                 <BackstageClock />
             </div>
@@ -282,14 +278,14 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
                 <div className={cx(['secondary', !secondaryContent && 'secondary--hidden'])} style={{ fontSize: `${externalFontSize}vw` }}>
                     {secondaryContent}
                 </div>
-                <div className={cx(['secondary', !secondaryContent && 'secondary--hidden'])} style={{ fontSize: `5vw` }}>
-                    Aux Timer 1:  {uga1}
+                <div className={cx(['secondary', !Aux_pbk(1) && 'secondary--hidden'])} style={{ fontSize: `2vw` }}>
+                    Aux Timer 1<br></br>  {uga1}
                 </div>
-                <div className={cx(['secondary', !secondaryContent && 'secondary--hidden'])} style={{ fontSize: `5vw` }}>
-                    Aux Timer 2:  {uga2}
+                <div className={cx(['secondary', !Aux_pbk(2) && 'secondary--hidden'])} style={{ fontSize: `2vw` }}>
+                    Aux Timer 2<br></br>  {uga2}
                 </div>
-                <div className={cx(['secondary', !secondaryContent && 'secondary--hidden'])} style={{ fontSize: `5vw` }}>
-                    Aux Timer 3:  {uga3}
+                <div className={cx(['secondary', !Aux_pbk(3) && 'secondary--hidden'])} style={{ fontSize: `2vw` }}>
+                    Aux Timer 3<br></br>  {uga3}
                 </div>
             </div>
 
