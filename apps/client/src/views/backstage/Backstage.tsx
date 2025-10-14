@@ -16,7 +16,7 @@ import TitleCard from '../../common/components/title-card/TitleCard';
 import ViewLogo from '../../common/components/view-logo/ViewLogo';
 import ViewParamsEditor from '../../common/components/view-params-editor/ViewParamsEditor';
 import { useBackstageSocket, useClock } from '../../common/hooks/useSocket';
-import { useTimerSocket } from '../../common/hooks/useSocket';
+import { useTimerSocket, useAuxTimerControl } from '../../common/hooks/useSocket';
 import { useWindowTitle } from '../../common/hooks/useWindowTitle';
 import { cx, timerPlaceholderMin } from '../../common/utils/styleUtils';
 import { formatTime, getDefaultFormat } from '../../common/utils/time';
@@ -25,6 +25,7 @@ import { getFormattedTimer, getTimerByType } from '../../features/viewers/common
 import { useTranslation } from '../../translation/TranslationProvider';
 import Loader from '../common/loader/Loader';
 import ScheduleExport from '../common/schedule/ScheduleExport';
+import { getFormattedTimer } from '../../features/viewers/common/viewUtils';
 
 import { getBackstageOptions, useBackstageOptions } from './backstage.options';
 import { getCardData, getIsPendingStart, getShowProgressBar, isOvertime } from './backstage.utils';
@@ -165,9 +166,23 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
         hideSecondary,
     );
     
-    const uga1 = formatTime(auxTimer.aux1);
-    const uga2 = formatTime(auxTimer.aux2);
-    const uga3 = formatTime(auxTimer.aux3);
+    const uga1 = getFormattedTimer(auxTimer.aux1, TimerType.CountDown, localisedMinutes, {
+      removeSeconds,
+      removeLeadingZero,
+    });
+    const uga2 = getFormattedTimer(auxTimer.aux2, TimerType.CountDown, localisedMinutes, {
+      removeSeconds,
+      removeLeadingZero,
+    });
+    const uga3 = getFormattedTimer(auxTimer.aux3, TimerType.CountDown, localisedMinutes, {
+      removeSeconds,
+      removeLeadingZero,
+    });
+
+    const { Aux1_state } = useAuxTimerControl(1);
+    const { Aux2_state } = useAuxTimerControl(2);
+    const { Aux3_state } = useAuxTimerControl(3);
+    console.log(Aux1_state, " ", Aux2_state, " ", Aux3_state);
     
     // gather presentation styles
     const qrSize = Math.max(window.innerWidth / 15, 72);
@@ -264,13 +279,13 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
                 <div className={cx(['secondary', !secondaryContent && 'secondary--hidden'])} style={{ fontSize: `${externalFontSize}vw` }}>
                     {secondaryContent}
                 </div>
-                <div className={cx(['secondary', !secondaryContent && 'secondary--hidden'])} style={{ fontSize: `${externalFontSize}vw` }}>
+                <div className={cx(['secondary', !secondaryContent && 'secondary--hidden'])} style={{ fontSize: `5vw` }}>
                     Aux Timer 1:  {uga1}
                 </div>
-                <div className={cx(['secondary', !secondaryContent && 'secondary--hidden'])} style={{ fontSize: `${externalFontSize}vw` }}>
+                <div className={cx(['secondary', !secondaryContent && 'secondary--hidden'])} style={{ fontSize: `5vw` }}>
                     Aux Timer 2:  {uga2}
                 </div>
-                <div className={cx(['secondary', !secondaryContent && 'secondary--hidden'])} style={{ fontSize: `${externalFontSize}vw` }}>
+                <div className={cx(['secondary', !secondaryContent && 'secondary--hidden'])} style={{ fontSize: `5vw` }}>
                     Aux Timer 3:  {uga3}
                 </div>
             </div>
