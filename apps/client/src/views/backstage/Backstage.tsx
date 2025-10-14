@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import QRCode from 'react-qr-code';
 import { useViewportSize } from '@mantine/hooks';
-import { OntimeView, ProjectData, TimerType, SimplePlayback } from 'ontime-types';
+import { OntimeView, ProjectData, TimerType, SimplePlayback, MessageState } from 'ontime-types';
 import { millisToString, removeLeadingZero } from 'ontime-utils';
 
 import { FitText } from '../../common/components/fit-text/FitText';
@@ -165,6 +165,10 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
         removeLeadingZeros,
         hideSecondary,
     );
+
+    const Aux1Label = MessageState.aux1label;
+    const Aux2Label = MessageState.aux2label;
+    const Aux3Label = MessageState.aux3label;
     
     const uga1 = getFormattedTimer(auxTimer.aux1, TimerType.CountDown, localisedMinutes, {});
     const uga2 = getFormattedTimer(auxTimer.aux2, TimerType.CountDown, localisedMinutes, {});
@@ -280,13 +284,13 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
                         {secondaryContent}
                     </div>
                     <div className={cx(['secondary', !Aux_pbk(1) && 'secondary--hidden'])} style={{ fontSize: `2vw` }}>
-                        Aux Timer 1<br></br>  {uga1}
+                        {Aux1Label}<br></br>  {uga1}
                     </div>
                     <div className={cx(['secondary', !Aux_pbk(2) && 'secondary--hidden'])} style={{ fontSize: `2vw` }}>
-                        Aux Timer 2<br></br>  {uga2}
+                        {Aux2Label}<br></br>  {uga2}
                     </div>
                     <div className={cx(['secondary', !Aux_pbk(3) && 'secondary--hidden'])} style={{ fontSize: `2vw` }}>
-                        Aux Timer 3<br></br>  {uga3}
+                        {Aux3Label}<br></br>  {uga3}
                     </div>
                 </div>
             </div>
