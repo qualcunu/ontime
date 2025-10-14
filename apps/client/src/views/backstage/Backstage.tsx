@@ -7,6 +7,8 @@ import { millisToString, removeLeadingZero } from 'ontime-utils';
 import { FitText } from '../../common/components/fit-text/FitText';
 import MultiPartProgressBar from '../../common/components/multi-part-progress-bar/MultiPartProgressBar';
 
+import { serverURL } from '../../externals';
+
 import ProgressBar from '../../common/components/progress-bar/ProgressBar';
 import Empty from '../../common/components/state/Empty';
 import EmptyPage from '../../common/components/state/EmptyPage';
@@ -117,6 +119,7 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
         time.phase,
     );
     // gather timer data
+    const url = serverURL + "/preset/e?n=1";
     const isPendingStart = getIsPendingStart(time.playback, time.phase);
     const startedAt = isPendingStart ? formatTime(time.secondaryTimer) : formatTime(time.startedAt);
     const scheduledStart = (() => {
@@ -188,6 +191,7 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
             <div className='project-header'>
                 {projectData?.logo && <ViewLogo name={projectData.logo} className='logo' />}
                 <div className='title'>{projectData.title}</div>
+                <QRCode size={50} value={url} className={style.qrCode} />
                 <BackstageClock />
             </div>
             {showProgressBar && (
