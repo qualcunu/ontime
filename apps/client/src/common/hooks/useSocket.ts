@@ -38,6 +38,18 @@ export const useExternalMessageInput = createSelector((state: RuntimeStore) => (
   visible: state.message.timer.secondarySource === 'secondary',
 }));
 
+export const useExternalAux1Label = createSelector((state: RuntimeStore) => ({
+  text: state.message.aux1label,
+}));
+
+export const useExternalAux2Label = createSelector((state: RuntimeStore) => ({
+  text: state.message.aux2label,
+}));
+
+export const useExternalAux3Label = createSelector((state: RuntimeStore) => ({
+  text: state.message.aux3label,
+}));
+
 export const useMessagePreview = createSelector((state: RuntimeStore) => ({
   blink: state.message.timer.blink,
   blackout: state.message.timer.blackout,
