@@ -46,7 +46,7 @@ import style from '../../features/sharing/GenerateLinkForm.module.scss';
 
 import './Backstage.scss';
 //import './Timer.scss';
-import './StudioTimers.scss';
+//import './StudioTimers.scss';
 
 export default function BackstageLoader() {
     const { data, status } = useBackstageData();
@@ -173,10 +173,11 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
     const { Aux1_pbk, Aux1_dir } = useAuxTimerControl(1);
     const { Aux2_pbk, Aux2_dir } = useAuxTimerControl(2);
     const { Aux3_pbk, Aux3_dir } = useAuxTimerControl(3);
-    const Aux1_isActive = Aux1_pbk !== SimplePlayback.Stop;
-    const Aux2_isActive = Aux2_pbk !== SimplePlayback.Stop;
-    const Aux3_isActive = Aux3_pbk !== SimplePlayback.Stop;
-    console.log(Aux1_isActive, " ", Aux2_isActive, " ", Aux3_isActive);
+    // const Aux1_isActive = Aux1_pbk !== SimplePlayback.Stop;
+    // const Aux2_isActive = Aux2_pbk !== SimplePlayback.Stop;
+    // const Aux3_isActive = Aux3_pbk !== SimplePlayback.Stop;
+    console.log(Aux1_pbk, " ", Aux2_pbk, " ", Aux3_pbk);
+    console.log(Aux1_dir, " ", Aux2_dir, " ", Aux3_dir);
     
     // gather presentation styles
     const qrSize = Math.max(window.innerWidth / 15, 72);
@@ -273,7 +274,6 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
                 <div className={cx(['secondary', !secondaryContent && 'secondary--hidden'])} style={{ fontSize: `${externalFontSize}vw` }}>
                     {secondaryContent}
                 </div>
-                <StudioTimersAux />
                 <div className={cx(['secondary', !secondaryContent && 'secondary--hidden'])} style={{ fontSize: `5vw` }}>
                     Aux Timer 1:  {uga1}
                 </div>
@@ -288,31 +288,6 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
             {showSchedule && <ScheduleExport selectedId={selectedEventId} />}
         </div>
     );
-}
-
-function StudioTimersAux() {
-  const auxTimer = useAuxTimersTime();
-
-  return (
-    <div className='card' id='card-aux'>
-      <div className='card__row'>
-        <div>
-          <div className='label'>Aux 1</div>
-          <div className='extra'>{millisToString(auxTimer.aux1)}</div>
-        </div>
-
-        <div>
-          <div className='label center'>Aux 2</div>
-          <div className='extra center'>{millisToString(auxTimer.aux2)}</div>
-        </div>
-
-        <div>
-          <div className='label right'>Aux 3</div>
-          <div className='extra right'>{millisToString(auxTimer.aux3)}</div>
-        </div>
-      </div>
-    </div>
-  );
 }
 
 function BackstageClock() {
