@@ -210,7 +210,7 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
                 <div className='title'>{projectData.title}</div>
                 <BackstageClock />
             </div>
-            <div style={{width: '60%'}}>
+            <div style={{width: '142%'; contain: 'inline-size';}}>
                 {showProgressBar && (
                     <MultiPartProgressBar
                         className={cx(['progress-container', !isPlaying && 'progress-container--paused'])}
@@ -291,7 +291,7 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
                 </div>
             </div>
 
-            {showSchedule && <ScheduleExport selectedId={selectedEventId} />}
+            {showSchedule && <ScheduleExport selectedId={selectedEventId} style={{left: '146%'; text-overflow: 'ellipsis';}}/>}
         </div>
     );
 }
