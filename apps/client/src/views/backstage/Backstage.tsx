@@ -16,7 +16,7 @@ import TitleCard from '../../common/components/title-card/TitleCard';
 import ViewLogo from '../../common/components/view-logo/ViewLogo';
 import ViewParamsEditor from '../../common/components/view-params-editor/ViewParamsEditor';
 import { useBackstageSocket, useClock } from '../../common/hooks/useSocket';
-import { useTimerSocket, useAuxTimerControl } from '../../common/hooks/useSocket';
+import { useTimerSocket, useAuxTimerControl, useAuxTimersTime } from '../../common/hooks/useSocket';
 import { useWindowTitle } from '../../common/hooks/useWindowTitle';
 import { cx, timerPlaceholderMin } from '../../common/utils/styleUtils';
 import { formatTime, getDefaultFormat } from '../../common/utils/time';
@@ -46,6 +46,7 @@ import style from '../../features/sharing/GenerateLinkForm.module.scss';
 
 import './Backstage.scss';
 //import './Timer.scss';
+import './StudioTimers.scss';
 
 export default function BackstageLoader() {
     const { data, status } = useBackstageData();
@@ -283,6 +284,31 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
             {showSchedule && <ScheduleExport selectedId={selectedEventId} />}
         </div>
     );
+}
+
+function StudioTimersAux() {
+  const auxTimer = useAuxTimersTime();
+
+  return (
+    <div className='card' id='card-aux'>
+      <div className='card__row'>
+        <div>
+          <div className='label'>Aux 1</div>
+          <div className='extra'>{millisToString(auxTimer.aux1)}</div>
+        </div>
+
+        <div>
+          <div className='label center'>Aux 2</div>
+          <div className='extra center'>{millisToString(auxTimer.aux2)}</div>
+        </div>
+
+        <div>
+          <div className='label right'>Aux 3</div>
+          <div className='extra right'>{millisToString(auxTimer.aux3)}</div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 function BackstageClock() {
