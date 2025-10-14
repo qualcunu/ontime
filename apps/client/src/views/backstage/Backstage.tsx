@@ -210,7 +210,7 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
                 <div className='title'>{projectData.title}</div>
                 <BackstageClock />
             </div>
-            <div style={{width: '142%', contain: 'inline-size'}}>
+            <div>
                 {showProgressBar && (
                     <MultiPartProgressBar
                         className={cx(['progress-container', !isPlaying && 'progress-container--paused'])}
@@ -276,7 +276,7 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
                     {showNext && hasEvents && (
                         <TitleCard className='event' label='next' title={nextMain} secondary={nextSecondary} color={eventNextTextColor} bgColor={eventNextBgColor} />
                     )}
-                    <div className={cx(['secondary', !secondaryContent && 'secondary--hidden'])} style={{ fontSize: `${externalFontSize}vw`, textWrap: 'wrap', overflowWrap: 'break-word' }}>
+                    <div className={cx(['secondary', !secondaryContent && 'secondary--hidden'])} style={{ fontSize: `${externalFontSize}vw`, textWrap: 'wrap', overflowWrap: 'break-word', textTransform: 'uppercase', contain: 'inline-size' }}>
                         {secondaryContent}
                     </div>
                     <div className={cx(['secondary', !Aux_pbk(1) && 'secondary--hidden'])} style={{ fontSize: `2vw` }}>
