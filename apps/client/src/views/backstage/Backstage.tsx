@@ -210,7 +210,7 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
                 <div className='title'>{projectData.title}</div>
                 <BackstageClock />
             </div>
-            <div style={{width: "60%}}>
+            <div style={{width: '60%'}}>
                 {showProgressBar && (
                     <MultiPartProgressBar
                         className={cx(['progress-container', !isPlaying && 'progress-container--paused'])}
