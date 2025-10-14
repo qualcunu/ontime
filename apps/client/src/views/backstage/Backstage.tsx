@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import QRCode from 'react-qr-code';
 import { useViewportSize } from '@mantine/hooks';
-import { OntimeView, ProjectData, TimerType, SimplePlayback, MessageState } from 'ontime-types';
+import { OntimeView, ProjectData, TimerType, SimplePlayback } from 'ontime-types';
 import { millisToString, removeLeadingZero } from 'ontime-utils';
 
 import { FitText } from '../../common/components/fit-text/FitText';
@@ -166,9 +166,9 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
         hideSecondary,
     );
 
-    const Aux1Label = MessageState.aux1label;
-    const Aux2Label = MessageState.aux2label;
-    const Aux3Label = MessageState.aux3label;
+    const Aux1Label = message.aux1label;
+    const Aux2Label = message.aux2label;
+    const Aux3Label = message.aux3label;
     
     const uga1 = getFormattedTimer(auxTimer.aux1, TimerType.CountDown, localisedMinutes, {});
     const uga2 = getFormattedTimer(auxTimer.aux2, TimerType.CountDown, localisedMinutes, {});
