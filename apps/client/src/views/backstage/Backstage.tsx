@@ -170,14 +170,22 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
     const uga2 = getFormattedTimer(auxTimer.aux2, TimerType.CountDown, localisedMinutes, {});
     const uga3 = getFormattedTimer(auxTimer.aux3, TimerType.CountDown, localisedMinutes, {});
 
-    const { Aux1_pbk, Aux1_dir } = useAuxTimerControl(1);
-    const { Aux2_pbk, Aux2_dir } = useAuxTimerControl(2);
-    const { Aux3_pbk, Aux3_dir } = useAuxTimerControl(3);
+    function Aux_pbk(auxNumber){
+        const { playback, direction } = useAuTimerControl(auxNumber);
+
+        const isActive = playback !== SimplePlayback.Stop;
+        
+        console.log(isActive, " ", playback, " ", direction);
+        
+        return(isActive, playback, direction);
+    }
     // const Aux1_isActive = Aux1_pbk !== SimplePlayback.Stop;
     // const Aux2_isActive = Aux2_pbk !== SimplePlayback.Stop;
     // const Aux3_isActive = Aux3_pbk !== SimplePlayback.Stop;
-    console.log(Aux1_pbk, " ", Aux2_pbk, " ", Aux3_pbk);
-    console.log(Aux1_dir, " ", Aux2_dir, " ", Aux3_dir);
+    Aux_pbk(1);
+    Aux_pbk(2);
+    Aux_pbk(3);
+
     
     // gather presentation styles
     const qrSize = Math.max(window.innerWidth / 15, 72);
