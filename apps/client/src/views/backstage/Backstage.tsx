@@ -42,6 +42,8 @@ import {
 } from './timer.utils';
 import { TimerData, useTimerData } from './useTimerData';
 
+import style from './GenerateLinkForm.module.scss';
+
 import './Backstage.scss';
 //import './Timer.scss';
 
