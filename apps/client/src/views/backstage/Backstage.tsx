@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import QRCode from 'react-qr-code';
 import { useViewportSize } from '@mantine/hooks';
-import { OntimeView, ProjectData, TimerType } from 'ontime-types';
+import { OntimeView, ProjectData, TimerType, SimplePlayback } from 'ontime-types';
 import { millisToString, removeLeadingZero } from 'ontime-utils';
 
 import { FitText } from '../../common/components/fit-text/FitText';
@@ -170,10 +170,13 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
     const uga2 = getFormattedTimer(auxTimer.aux2, TimerType.CountDown, localisedMinutes, {});
     const uga3 = getFormattedTimer(auxTimer.aux3, TimerType.CountDown, localisedMinutes, {});
 
-    const { Aux1_state } = useAuxTimerControl(1);
-    const { Aux2_state } = useAuxTimerControl(2);
-    const { Aux3_state } = useAuxTimerControl(3);
-    console.log(Aux1_state, " ", Aux2_state, " ", Aux3_state);
+    const { Aux1_pbk, Aux1_dir } = useAuxTimerControl(1);
+    const { Aux2_pbk, Aux2_dir } = useAuxTimerControl(2);
+    const { Aux3_pbk, Aux3_dir } = useAuxTimerControl(3);
+    const Aux1_isActive = Aux1_pbk !== SimplePlayback.Stop;
+    const Aux2_isActive = Aux2_pbk !== SimplePlayback.Stop;
+    const Aux3_isActive = Aux3_pbk !== SimplePlayback.Stop;
+    console.log(Aux1_isActive, " ", Aux2_isActive, " ", Aux3_isActive);
     
     // gather presentation styles
     const qrSize = Math.max(window.innerWidth / 15, 72);
@@ -270,6 +273,7 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
                 <div className={cx(['secondary', !secondaryContent && 'secondary--hidden'])} style={{ fontSize: `${externalFontSize}vw` }}>
                     {secondaryContent}
                 </div>
+                <StudioTimersAux />
                 <div className={cx(['secondary', !secondaryContent && 'secondary--hidden'])} style={{ fontSize: `5vw` }}>
                     Aux Timer 1:  {uga1}
                 </div>
