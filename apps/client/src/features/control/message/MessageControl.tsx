@@ -5,6 +5,9 @@ import {
   setMessage,
   useExternalMessageInput as useSecondaryMessageInput,
   useTimerMessageInput,
+  useExternalMessageInput as useAux1Label,
+  useExternalMessageInput as useAux2Label,
+  useExternalMessageInput as useAux3Label,
 } from '../../../common/hooks/useSocket';
 
 import InputRow from './InputRow';
@@ -16,6 +19,9 @@ export default function MessageControl() {
       <TimerControlsPreview />
       <TimerMessageInput />
       <SecondaryInput />
+      <Aux1_Name />
+      <Aux2_Name />
+      <Aux3_Name />
     </>
   );
 }
@@ -71,3 +77,46 @@ function SecondaryInput() {
     </InputRow>
   );
 }
+
+function Aux1_Name() {
+  const { text } = useAux1Label();
+
+  return (
+    <InputRow
+      label='Aux 1 Label'
+      placeholder='Label for Aux 1'
+      text={text}
+      changeHandler={(newValue) => setMessage.aux1Label(newValue)}
+    >
+    </InputRow>
+  );
+}
+
+function Aux2_Name() {
+  const { text } = useAux2Label();
+
+  return (
+    <InputRow
+      label='Aux 2 Label'
+      placeholder='Label for Aux 2'
+      text={text}
+      changeHandler={(newValue) => setMessage.aux2Label(newValue)}
+    >
+    </InputRow>
+  );
+}
+
+function Aux3_Name() {
+  const { text } = useAux3Label();
+
+  return (
+    <InputRow
+      label='Aux 3 Label'
+      placeholder='Label for Aux 3'
+      text={text}
+      changeHandler={(newValue) => setMessage.aux3Label(newValue)}
+    >
+    </InputRow>
+  );
+}
+
