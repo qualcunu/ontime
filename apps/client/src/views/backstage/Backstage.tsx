@@ -276,7 +276,7 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
                     {showNext && hasEvents && (
                         <TitleCard className='event' label='next' title={nextMain} secondary={nextSecondary} color={eventNextTextColor} bgColor={eventNextBgColor} />
                     )}
-                    <div className={cx(['secondary', !secondaryContent && 'secondary--hidden'])} style={{ fontSize: `${externalFontSize}vw` }}>
+                    <div className={cx(['secondary', !secondaryContent && 'secondary--hidden'])} style={{ fontSize: `${externalFontSize}vw`, textWrap: 'wrap', overflowWrap: 'break-word' }}>
                         {secondaryContent}
                     </div>
                     <div className={cx(['secondary', !Aux_pbk(1) && 'secondary--hidden'])} style={{ fontSize: `2vw` }}>
@@ -291,7 +291,7 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
                 </div>
             </div>
 
-            {showSchedule && <ScheduleExport selectedId={selectedEventId} style={{left: '146%', textOverflow: 'ellipsis'}}/>}
+            {showSchedule && <ScheduleExport selectedId={selectedEventId} style={{left: '146%', textOverflow: 'ellipsis', whiteSpace: 'wrap'}}/>}
         </div>
     );
 }
