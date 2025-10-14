@@ -165,18 +165,9 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
         hideSecondary,
     );
     
-    const uga1 = getFormattedTimer(auxTimer.aux1, TimerType.CountDown, localisedMinutes, {
-      removeSeconds,
-      removeLeadingZero,
-    });
-    const uga2 = getFormattedTimer(auxTimer.aux2, TimerType.CountDown, localisedMinutes, {
-      removeSeconds,
-      removeLeadingZero,
-    });
-    const uga3 = getFormattedTimer(auxTimer.aux3, TimerType.CountDown, localisedMinutes, {
-      removeSeconds,
-      removeLeadingZero,
-    });
+    const uga1 = getFormattedTimer(auxTimer.aux1, TimerType.CountDown, localisedMinutes, {});
+    const uga2 = getFormattedTimer(auxTimer.aux2, TimerType.CountDown, localisedMinutes, {});
+    const uga3 = getFormattedTimer(auxTimer.aux3, TimerType.CountDown, localisedMinutes, {});
 
     const { Aux1_state } = useAuxTimerControl(1);
     const { Aux2_state } = useAuxTimerControl(2);
