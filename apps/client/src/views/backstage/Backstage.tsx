@@ -210,82 +210,84 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
                 <div className='title'>{projectData.title}</div>
                 <BackstageClock />
             </div>
-            {showProgressBar && (
-                <MultiPartProgressBar
-                    className={cx(['progress-container', !isPlaying && 'progress-container--paused'])}
-                    now={time.current}
-                    complete={totalTime}
-                    normalColor={viewSettings.normalColor}
-                    warning={eventNow?.timeWarning}
-                    warningColor={viewSettings.warningColor}
-                    danger={eventNow?.timeDanger}
-                    dangerColor={viewSettings.dangerColor}
-                    hideOvertime={!showFinished} />
-            )}
+            <div style={{width: "60%}}>
+                {showProgressBar && (
+                    <MultiPartProgressBar
+                        className={cx(['progress-container', !isPlaying && 'progress-container--paused'])}
+                        now={time.current}
+                        complete={totalTime}
+                        normalColor={viewSettings.normalColor}
+                        warning={eventNow?.timeWarning}
+                        warningColor={viewSettings.warningColor}
+                        danger={eventNow?.timeDanger}
+                        dangerColor={viewSettings.dangerColor}
+                        hideOvertime={!showFinished} />
+                )}
 
-            {!hasEvents && <Empty text={getLocalizedString('common.no_data')} className='empty-container' />}
-            <div className='card-container'>
-                {showNow && (
-                    <div className={cx(['timer-container', message.timer.blink && !showOverlay && 'blink'])} style={{flex: 'unset'}}>
-                        <div className={cx(['event', 'now', blinkClass && 'blink'])} style={{ backgroundColor: eventNowBgColor }}>
-                            <TitleCard title={nowMain} secondary={nowSecondary} bgColor={eventNowBgColor} color={eventNowTextColor} />
+                {!hasEvents && <Empty text={getLocalizedString('common.no_data')} className='empty-container' />}
+                <div className='card-container'>
+                    {showNow && (
+                        <div className={cx(['timer-container', message.timer.blink && !showOverlay && 'blink'])} style={{flex: 'unset'}}>
+                            <div className={cx(['event', 'now', blinkClass && 'blink'])} style={{ backgroundColor: eventNowBgColor }}>
+                                <TitleCard title={nowMain} secondary={nowSecondary} bgColor={eventNowBgColor} color={eventNowTextColor} />
+                                <div className='timer-group'>
+                                    <div className='time-entry'>
+                                        <div className={cx(['time-entry__label', isPendingStart && 'time-entry--pending'])} style={{ color: eventNowTextColor }}>
+                                            {isPendingStart ? getLocalizedString('countdown.waiting') : getLocalizedString('common.started_at')}
+                                        </div>
+                                        <SuperscriptTime time={startedAt} className='time-entry__value' style={{ color: eventNowTextColor }} />
+                                    </div>
+                                    <div className='timer-gap' />
+                                    <div className='time-entry' style={{ color: eventNowTextColor }}>
+                                        <div className='time-entry__label' style={{ color: eventNowTextColor }}>{getLocalizedString('common.expected_finish')}</div>
+                                        {isOvertime(time.current) ? (
+                                            <div className='time-entry__value' style={{ color: eventNowTextColor }}>{getLocalizedString('countdown.overtime')}</div>
+                                        ) : (
+                                            <SuperscriptTime time={formatTime(time.expectedFinish)} className='time-entry__value' style={{ color: eventNowTextColor }} />
+                                        )}
+                                    </div>
+                                    <div className='timer-gap' />
+                                    <div className='time-entry' style={{ color: eventNowTextColor }}>
+                                        <div className='time-entry__label' style={{ color: eventNowTextColor }}>{getLocalizedString('common.stage_timer')}</div>
+                                        <div className='time-entry__value' style={{ color: eventNowTextColor }}>{displayTimer}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                    {showPending && (
+                        <div className='event'>
+                            <div className='title-card__placeholder' style={{ color: eventNowTextColor }}>{getLocalizedString('countdown.waiting')}</div>
                             <div className='timer-group'>
                                 <div className='time-entry'>
                                     <div className={cx(['time-entry__label', isPendingStart && 'time-entry--pending'])} style={{ color: eventNowTextColor }}>
-                                        {isPendingStart ? getLocalizedString('countdown.waiting') : getLocalizedString('common.started_at')}
+                                        {getLocalizedString('common.scheduled_start')}
                                     </div>
-                                    <SuperscriptTime time={startedAt} className='time-entry__value' style={{ color: eventNowTextColor }} />
+                                    <SuperscriptTime time={scheduledStart} className='time-entry__value' style={{ color: eventNowTextColor }} />
                                 </div>
                                 <div className='timer-gap' />
-                                <div className='time-entry' style={{ color: eventNowTextColor }}>
-                                    <div className='time-entry__label' style={{ color: eventNowTextColor }}>{getLocalizedString('common.expected_finish')}</div>
-                                    {isOvertime(time.current) ? (
-                                        <div className='time-entry__value' style={{ color: eventNowTextColor }}>{getLocalizedString('countdown.overtime')}</div>
-                                    ) : (
-                                        <SuperscriptTime time={formatTime(time.expectedFinish)} className='time-entry__value' style={{ color: eventNowTextColor }} />
-                                    )}
-                                </div>
-                                <div className='timer-gap' />
-                                <div className='time-entry' style={{ color: eventNowTextColor }}>
-                                    <div className='time-entry__label' style={{ color: eventNowTextColor }}>{getLocalizedString('common.stage_timer')}</div>
-                                    <div className='time-entry__value' style={{ color: eventNowTextColor }}>{displayTimer}</div>
+                                <div className='time-entry'>
+                                    <div className='time-entry__label' style={{ color: eventNowTextColor }}>{getLocalizedString('common.scheduled_end')}</div>
+                                    <SuperscriptTime time={scheduledEnd} className='time-entry__value' style={{ color: eventNowTextColor }} />
                                 </div>
                             </div>
                         </div>
+                    )}
+                    {showNext && hasEvents && (
+                        <TitleCard className='event' label='next' title={nextMain} secondary={nextSecondary} color={eventNextTextColor} bgColor={eventNextBgColor} />
+                    )}
+                    <div className={cx(['secondary', !secondaryContent && 'secondary--hidden'])} style={{ fontSize: `${externalFontSize}vw` }}>
+                        {secondaryContent}
                     </div>
-                )}
-                {showPending && (
-                    <div className='event'>
-                        <div className='title-card__placeholder' style={{ color: eventNowTextColor }}>{getLocalizedString('countdown.waiting')}</div>
-                        <div className='timer-group'>
-                            <div className='time-entry'>
-                                <div className={cx(['time-entry__label', isPendingStart && 'time-entry--pending'])} style={{ color: eventNowTextColor }}>
-                                    {getLocalizedString('common.scheduled_start')}
-                                </div>
-                                <SuperscriptTime time={scheduledStart} className='time-entry__value' style={{ color: eventNowTextColor }} />
-                            </div>
-                            <div className='timer-gap' />
-                            <div className='time-entry'>
-                                <div className='time-entry__label' style={{ color: eventNowTextColor }}>{getLocalizedString('common.scheduled_end')}</div>
-                                <SuperscriptTime time={scheduledEnd} className='time-entry__value' style={{ color: eventNowTextColor }} />
-                            </div>
-                        </div>
+                    <div className={cx(['secondary', !Aux_pbk(1) && 'secondary--hidden'])} style={{ fontSize: `2vw` }}>
+                        Aux Timer 1<br></br>  {uga1}
                     </div>
-                )}
-                {showNext && hasEvents && (
-                    <TitleCard className='event' label='next' title={nextMain} secondary={nextSecondary} color={eventNextTextColor} bgColor={eventNextBgColor} />
-                )}
-                <div className={cx(['secondary', !secondaryContent && 'secondary--hidden'])} style={{ fontSize: `${externalFontSize}vw` }}>
-                    {secondaryContent}
-                </div>
-                <div className={cx(['secondary', !Aux_pbk(1) && 'secondary--hidden'])} style={{ fontSize: `2vw` }}>
-                    Aux Timer 1<br></br>  {uga1}
-                </div>
-                <div className={cx(['secondary', !Aux_pbk(2) && 'secondary--hidden'])} style={{ fontSize: `2vw` }}>
-                    Aux Timer 2<br></br>  {uga2}
-                </div>
-                <div className={cx(['secondary', !Aux_pbk(3) && 'secondary--hidden'])} style={{ fontSize: `2vw` }}>
-                    Aux Timer 3<br></br>  {uga3}
+                    <div className={cx(['secondary', !Aux_pbk(2) && 'secondary--hidden'])} style={{ fontSize: `2vw` }}>
+                        Aux Timer 2<br></br>  {uga2}
+                    </div>
+                    <div className={cx(['secondary', !Aux_pbk(3) && 'secondary--hidden'])} style={{ fontSize: `2vw` }}>
+                        Aux Timer 3<br></br>  {uga3}
+                    </div>
                 </div>
             </div>
 
