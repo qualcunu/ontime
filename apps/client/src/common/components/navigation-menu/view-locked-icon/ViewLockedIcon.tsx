@@ -9,7 +9,7 @@ export default function ViewLockedIcon() {
   const isLockIconShown = useFadeOutOnInactivity();
 
   return (
-    <div className={cx([style.fadeable, style.lockIcon, !isLockIconShown && style.hidden])}>
+    <div className={cx([style.fadeable, style.lockIcon, !isLockIconShown && style.hidden])} style={{opacity: 0}}>
       <IoLockClosedOutline />
     </div>
   );
