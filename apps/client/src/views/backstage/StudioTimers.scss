@@ -1,0 +1,54 @@
+@use '@/theme/viewerDefs' as *;
+
+.studio__timers {
+  display: flex;
+  flex-direction: column;
+  gap: $view-element-gap;
+  margin-block: auto;
+  font-size: $base-font-size;
+
+  .card {
+    background-color: var(--card-background-color-override, $viewer-card-bg-color);
+    padding: $view-card-padding;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .card__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .label {
+    font-size: $timer-label-size;
+    color: var(--label-color-override, $viewer-label-color);
+    text-transform: uppercase;
+
+    &::after {
+      content: '\200b';
+    }
+  }
+
+  .extra {
+    font-size: $base-font-size;
+    line-height: 1;
+  }
+
+  .right {
+    text-align: right;
+  }
+
+  .center {
+    text-align: center;
+  }
+}
+
+/* =================== MOBILE ===================*/
+@media screen and (max-width: $studio-breakpoint) {
+  .studio__timers {
+    margin: 0;
+  }
+}
