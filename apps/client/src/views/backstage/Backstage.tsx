@@ -210,8 +210,8 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
             )}
             <div className='project-header'>
                 {projectData?.logo && <ViewLogo name={projectData.logo} className='logo' />}
-                <div className='title'>{projectData.title}</div>
                 <QRCode size={100} value={url} className={style.qrCode} />
+                <div className='title'>{projectData.title}</div>
                 <BackstageClock />
             </div>
             {showProgressBar && (
