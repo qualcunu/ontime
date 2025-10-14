@@ -159,6 +159,11 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
         removeLeadingZeros,
         hideSecondary,
     );
+    
+    const uga1 = formatTime(auxTimer.aux1);
+    const uga2 = formatTime(auxTimer.aux2);
+    const uga3 = formatTime(auxTimer.aux3);
+    
     // gather presentation styles
     const qrSize = Math.max(window.innerWidth / 15, 72);
     const showProgress = getShowProgressBar(time.playback);
@@ -254,13 +259,13 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
                     {secondaryContent}
                 </div>
                 <div className={cx(['secondary', !secondaryContent && 'secondary--hidden'])} style={{ fontSize: `${externalFontSize}vw` }}>
-                    Aux Timer 1:  {formatTime(auxTimer.aux1)}
+                    Aux Timer 1:  {uga1}
                 </div>
                 <div className={cx(['secondary', !secondaryContent && 'secondary--hidden'])} style={{ fontSize: `${externalFontSize}vw` }}>
-                    Aux Timer 2:  {formatTime(auxTimer.aux2)}
+                    Aux Timer 2:  {uga2}
                 </div>
                 <div className={cx(['secondary', !secondaryContent && 'secondary--hidden'])} style={{ fontSize: `${externalFontSize}vw` }}>
-                    Aux Timer 3:  {formatTime(auxTimer.aux3)}
+                    Aux Timer 3:  {uga3}
                 </div>
             </div>
 
