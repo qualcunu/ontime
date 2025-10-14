@@ -5,9 +5,9 @@ import {
   setMessage,
   useExternalMessageInput as useSecondaryMessageInput,
   useTimerMessageInput,
-  useExternalMessageInput as useAux1Label,
-  useExternalMessageInput as useAux2Label,
-  useExternalMessageInput as useAux3Label,
+  useExternalAuxLabel as useAux1Label,
+  useExternalAuxLabel as useAux2Label,
+  useExternalAuxLabel as useAux3Label,
 } from '../../../common/hooks/useSocket';
 
 import InputRow from './InputRow';
