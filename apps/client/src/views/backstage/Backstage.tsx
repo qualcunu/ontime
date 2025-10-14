@@ -16,7 +16,7 @@ import TitleCard from '../../common/components/title-card/TitleCard';
 import ViewLogo from '../../common/components/view-logo/ViewLogo';
 import ViewParamsEditor from '../../common/components/view-params-editor/ViewParamsEditor';
 import { useBackstageSocket, useClock } from '../../common/hooks/useSocket';
-import { useTimerSocket, useAuxTimerControl, useAuxTimersTime } from '../../common/hooks/useSocket';
+import { useTimerSocket, useAuxTimerControl, useAuxTimersTime, getAuxLabel } from '../../common/hooks/useSocket';
 import { useWindowTitle } from '../../common/hooks/useWindowTitle';
 import { cx, timerPlaceholderMin } from '../../common/utils/styleUtils';
 import { formatTime, getDefaultFormat } from '../../common/utils/time';
@@ -166,6 +166,10 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
         hideSecondary,
     );
 
+    function getThatAuxLabel(theAuxNum){
+        const { text } = useAuxTimerControl(theAuxNum);
+        return(text);
+    }
     const Aux1Label = message.aux1label;
     const Aux2Label = message.aux2label;
     const Aux3Label = message.aux3label; 
@@ -283,13 +287,13 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
                         {secondaryContent}
                     </div>
                     <div className={cx(['secondary', !Aux_pbk(1) && 'secondary--hidden'])} style={{ fontSize: `2vw` }}>
-                        {Aux1Label}<br></br>  {uga1}
+                        {getThatAuxLabel(1)}<br></br>  {uga1}
                     </div>
                     <div className={cx(['secondary', !Aux_pbk(2) && 'secondary--hidden'])} style={{ fontSize: `2vw` }}>
-                        {Aux2Label}<br></br>  {uga2}
+                        {getThatAuxLabel(2)}<br></br>  {uga2}
                     </div>
                     <div className={cx(['secondary', !Aux_pbk(3) && 'secondary--hidden'])} style={{ fontSize: `2vw` }}>
-                        {Aux3Label}<br></br>  {uga3}
+                        {getThatAuxLabel(3)}<br></br>  {uga3}
                     </div>
                 </div>
             </div>
