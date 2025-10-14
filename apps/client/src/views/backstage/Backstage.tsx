@@ -168,8 +168,7 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
 
     const Aux1Label = message.aux1label;
     const Aux2Label = message.aux2label;
-    const Aux3Label = message.aux3label;
-    console.log(Aux1Label, " ", message);    
+    const Aux3Label = message.aux3label; 
     const uga1 = getFormattedTimer(auxTimer.aux1, TimerType.CountDown, localisedMinutes, {});
     const uga2 = getFormattedTimer(auxTimer.aux2, TimerType.CountDown, localisedMinutes, {});
     const uga3 = getFormattedTimer(auxTimer.aux3, TimerType.CountDown, localisedMinutes, {});
