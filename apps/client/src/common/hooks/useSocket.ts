@@ -117,6 +117,22 @@ export const useAuxTimerTime = (index: number) =>
     return state.auxtimer3.current;
   })();
 
+export const getAuxLabel = (index: number) => 
+  createSelector((state: RuntimeStore) => {
+    if (index === 1)
+      return {
+        text: state.message.aux1label 
+      };
+    if (index === 2)
+      return {
+        text: state.message.aux2label
+      };
+    if (index === 3)
+      return {
+        text: state.message.aux3label
+      };
+})();
+
 export const useAuxTimerControl = (index: number) =>
   createSelector((state: RuntimeStore) => {
     if (index === 1)
