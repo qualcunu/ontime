@@ -42,7 +42,7 @@ import {
 } from './timer.utils';
 import { TimerData, useTimerData } from './useTimerData';
 
-import style from '../features/sharing/GenerateLinkForm.module.scss';
+import style from '..../features/sharing/GenerateLinkForm.module.scss';
 
 import './Backstage.scss';
 //import './Timer.scss';
