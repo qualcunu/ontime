@@ -18,11 +18,17 @@ describe('MessageService', () => {
     const newState = messageService.patch({
       timer: { text: 'new text', visible: true },
       secondary: 'secondary',
+      aux1label: 'aux1label',
+      aux2label: 'aux2label',
+      aux3label: 'aux3label',
     });
 
     expect(newState).toMatchObject({
       timer: { text: 'new text', visible: true, blackout: false, blink: false, secondarySource: null },
       secondary: 'secondary',
+      aux1label: 'aux1label',
+      aux2label: 'aux2label',
+      aux3label: 'aux3label',
     });
   });
 
@@ -34,6 +40,9 @@ describe('MessageService', () => {
     expect(newState).toMatchObject({
       timer: { text: 'initial text', visible: true, blackout: false, blink: false, secondarySource: null },
       secondary: '',
+      aux1label: '',
+      aux2label: '',
+      aux3label: '',
     });
   });
 });
