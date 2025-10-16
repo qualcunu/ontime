@@ -101,6 +101,9 @@ const actionHandlers: Record<ApiActionTag, ActionHandler> = {
     const patch: DeepPartial<MessageState> = {
       timer: 'timer' in payload ? validateTimerMessage(payload.timer) : undefined,
       secondary: 'secondary' in payload ? validateMessage(payload.secondary) : undefined,
+      aux1label: 'aux1label' in payload ? validateMessage(payload.aux1label) : undefined,
+      aux2label: 'aux2label' in payload ? validateMessage(payload.aux2label) : undefined,
+      aux3label: 'aux3label' in payload ? validateMessage(payload.aux3label) : undefined,
     };
 
     const newMessage = messageService.patch(patch);
