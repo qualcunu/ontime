@@ -167,7 +167,7 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
     );
 
     function getThatAuxLabel(theAuxNum){
-        const { text } = useAuxTimerControl(theAuxNum);
+        const { text } = getAuxLabel(theAuxNum);
         return(text);
     }
     const Aux1Label = message.aux1label;
