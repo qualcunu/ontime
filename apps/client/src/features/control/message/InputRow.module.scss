@@ -5,6 +5,7 @@
   grid-template-columns: 1fr auto;
   gap: $element-spacing;
   margin-top: $element-inner-spacing;
+  Overflow-y: scroll;
 }
 
 .label {
