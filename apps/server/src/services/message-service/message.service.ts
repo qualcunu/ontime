@@ -44,6 +44,9 @@ export function patch(patch: DeepPartial<MessageState>): MessageState {
 
   if ('timer' in patch) newState.timer = { ...newState.timer, ...patch.timer };
   if ('secondary' in patch && patch.secondary !== undefined) newState.secondary = patch.secondary;
+  if ('aux1label' in patch && patch.aux1label !== undefined) newState.aux1label = patch.aux1label;
+  if ('aux2label' in patch && patch.aux2label !== undefined) newState.aux2label = patch.aux2label;
+  if ('aux3label' in patch && patch.aux3label !== undefined) newState.aux3label = patch.aux3label;
 
   throttledSet('message', newState);
   return newState;
