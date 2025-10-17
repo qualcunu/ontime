@@ -105,8 +105,7 @@ export function getShowModifiers(
   }
 
   return {
-    showEndMessage: freezeOvertime && freezeMessage !== '',
-    showFinished: phase === TimerPhase.Overtime,
+    showEndMessage: phase === TimerPhase.Overtime && freezeOvertime && freezeMessage !== '',    showFinished: phase === TimerPhase.Overtime,
     showWarning: phase === TimerPhase.Warning,
     showDanger: phase === TimerPhase.Danger,
   };
