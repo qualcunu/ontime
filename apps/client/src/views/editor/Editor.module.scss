@@ -47,6 +47,7 @@ $panel-gap: 0.5rem;
 }
 
 .messages {
+  overflow-y: scroll;
   flex: 1;
 }
 
