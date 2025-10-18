@@ -96,7 +96,7 @@ export default function AppRouter() {
           }
         />
         {/*/!* Protected Routes *!/*/}
-        <Route path='dev-editor' element={<Editor />} />
+        <Route path='editor' element={<Editor />} />
         <Route path='dev-cuesheet' element={<Cuesheet />} />
         <Route
           path='dev-op'
