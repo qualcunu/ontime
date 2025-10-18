@@ -44,19 +44,19 @@ export default function AppRouter() {
         <Route
           path='timer'
           element={
-            <ViewLoader>
+            <EditorFeatureWrapper>
               <ViewNavigationMenu isNavigationLocked={getIsNavigationLocked()} />
               <Timer />
-            </ViewLoader>
+            </EditorFeatureWrapper>
           }
         />
         <Route
           path='countdown'
           element={
-            <ViewLoader>
+            <EditorFeatureWrapper>
               <ViewNavigationMenu isNavigationLocked={getIsNavigationLocked()} />
               <Countdown />
-            </ViewLoader>
+            </EditorFeatureWrapper>
           }
         />
         <Route
@@ -71,28 +71,28 @@ export default function AppRouter() {
         <Route
           path='studio'
           element={
-            <ViewLoader>
+            <EditorFeatureWrapper>
               <ViewNavigationMenu isNavigationLocked={getIsNavigationLocked()} />
               <StudioClock />
-            </ViewLoader>
+            </EditorFeatureWrapper>
           }
         />
         <Route
           path='timeline'
           element={
-            <ViewLoader>
+            <EditorFeatureWrapper>
               <ViewNavigationMenu isNavigationLocked={getIsNavigationLocked()} />
               <Timeline />
-            </ViewLoader>
+            </EditorFeatureWrapper>
           }
         />
         <Route
-          path='info'
+          path='dev4'
           element={
-            <ViewLoader>
+            <EditorFeatureWrapper>
               <ViewNavigationMenu suppressSettings isNavigationLocked={getIsNavigationLocked()} />
               <ProjectInfo />
-            </ViewLoader>
+            </EditorFeatureWrapper>
           }
         />
         {/*/!* Protected Routes *!/*/}
@@ -101,15 +101,15 @@ export default function AppRouter() {
         <Route
           path='op'
           element={
-            <ViewLoader>
+            <EditorFeatureWrapper>
               <ViewNavigationMenu isNavigationLocked={getIsNavigationLocked()} />
               <Operator />
-            </ViewLoader>
+            </EditorFeatureWrapper>
           }
         />
         {/*/!* Protected Routes - Elements *!/*/}
         <Route
-          path='rundown'
+          path='dev3'
           element={
             <EditorFeatureWrapper>
               <RundownPanel />
@@ -117,7 +117,7 @@ export default function AppRouter() {
           }
         />
         <Route
-          path='timercontrol'
+          path='dev'
           element={
             <EditorFeatureWrapper>
               <TimerControl />
@@ -125,7 +125,7 @@ export default function AppRouter() {
           }
         />
         <Route
-          path='messagecontrol'
+          path='dev1'
           element={
             <EditorFeatureWrapper>
               <MessageControl />
@@ -133,7 +133,7 @@ export default function AppRouter() {
           }
         />
         <Route
-          path='log'
+          path='dev2'
           element={
             <EditorFeatureWrapper>
               <Log />
