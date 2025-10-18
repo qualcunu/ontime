@@ -2,7 +2,7 @@
  * Describes all views in Ontime
  */
 export enum OntimeView {
-  Editor = 'editor',
+  Editor = 'backstage',
   Cuesheet = 'cuesheet',
   Operator = 'op',
   Timer = 'timer',
