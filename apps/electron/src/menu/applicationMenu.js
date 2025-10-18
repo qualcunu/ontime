@@ -33,8 +33,7 @@ function getApplicationMenu(askToQuit, clientUrl, serverUrl, redirectWindow, sho
     makeViewMenu(clientUrl),
     makeSettingsMenu(redirectWindow),
     makeHelpMenu(redirectWindow),
-    ...(isProduction ? [{ label: 'Dev', submenu: [{ role: 'toggleDevTools' }] }]),
-  ] : [{ label: 'Dev', submenu: [{ role: 'toggleDevTools' }] }]),
+    ...(isProduction ? [] : [{ label: 'Dev', submenu: [{ role: 'toggleDevTools' }] }]),
   ];
   return Menu.buildFromTemplate(template);
 }
