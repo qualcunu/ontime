@@ -122,7 +122,7 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
         time.phase,
     );
     // gather timer data
-    const url = serverURL + "/preset/e/?stopCycle=true&showExpected=true&extra-info=custom-Color&n=1";
+    const url = serverURL;
     const isPendingStart = getIsPendingStart(time.playback, time.phase);
     const startedAt = isPendingStart ? formatTime(time.secondaryTimer) : formatTime(time.startedAt);
     const scheduledStart = (() => {
