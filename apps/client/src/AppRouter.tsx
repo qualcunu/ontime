@@ -60,7 +60,7 @@ export default function AppRouter() {
           }
         />
         <Route
-          path='dev-backstage'
+          path='backstage'
           element={
             <ViewLoader>
               <ViewNavigationMenu isNavigationLocked={getIsNavigationLocked()} />
