@@ -206,7 +206,7 @@ function Backstage({ events, customFields, projectData, isMirrored, settings, vi
             <ViewParamsEditor target={OntimeView.Backstage} viewOptions={backstageOptions} />
             {!hideMessage && (
                 <div className={cx(['message-overlay', showOverlay && 'message-overlay--active'])}>
-                    <FitText mode='multi' min={32} max={256} className={cx(['message', message.timer.blink && 'blink'])}>
+                    <FitText mode='multi' min={32} max={60} className={cx(['message', message.timer.blink && 'blink'])}>
                         {message.timer.text}
                     </FitText>
                 </div>
