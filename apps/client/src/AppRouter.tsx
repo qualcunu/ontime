@@ -42,25 +42,25 @@ export default function AppRouter() {
       <SentryRouter>
         <Route path='/' element={<Navigate to='/preset/e/?stopCycle=true&showExpected=true&extra-info=custom-Color&n=1' />} />
         <Route
-          path='timer'
+          path='dev-timer'
           element={
-            <EditorFeatureWrapper>
+            <ViewLoader>
               <ViewNavigationMenu isNavigationLocked={getIsNavigationLocked()} />
               <Timer />
-            </EditorFeatureWrapper>
+            </ViewLoader>
           }
         />
         <Route
-          path='countdown'
+          path='dev-countdown'
           element={
-            <EditorFeatureWrapper>
+            <ViewLoader>
               <ViewNavigationMenu isNavigationLocked={getIsNavigationLocked()} />
               <Countdown />
-            </EditorFeatureWrapper>
+            </ViewLoader>
           }
         />
         <Route
-          path='backstage'
+          path='dev-backstage'
           element={
             <ViewLoader>
               <ViewNavigationMenu isNavigationLocked={getIsNavigationLocked()} />
@@ -69,47 +69,47 @@ export default function AppRouter() {
           }
         />
         <Route
-          path='studio'
+          path='dev-studio'
           element={
-            <EditorFeatureWrapper>
+            <ViewLoader>
               <ViewNavigationMenu isNavigationLocked={getIsNavigationLocked()} />
               <StudioClock />
-            </EditorFeatureWrapper>
+            </ViewLoader>
           }
         />
         <Route
-          path='timeline'
+          path='dev-timeline'
           element={
-            <EditorFeatureWrapper>
+            <ViewLoader>
               <ViewNavigationMenu isNavigationLocked={getIsNavigationLocked()} />
               <Timeline />
-            </EditorFeatureWrapper>
+            </ViewLoader>
           }
         />
         <Route
-          path='dev4'
+          path='dev-info'
           element={
-            <EditorFeatureWrapper>
+            <ViewLoader>
               <ViewNavigationMenu suppressSettings isNavigationLocked={getIsNavigationLocked()} />
               <ProjectInfo />
-            </EditorFeatureWrapper>
+            </ViewLoader>
           }
         />
         {/*/!* Protected Routes *!/*/}
-        <Route path='editor' element={<Editor />} />
-        <Route path='cuesheet' element={<Cuesheet />} />
+        <Route path='dev-editor' element={<Editor />} />
+        <Route path='dev-cuesheet' element={<Cuesheet />} />
         <Route
-          path='op'
+          path='dev-op'
           element={
-            <EditorFeatureWrapper>
+            <ViewLoader>
               <ViewNavigationMenu isNavigationLocked={getIsNavigationLocked()} />
               <Operator />
-            </EditorFeatureWrapper>
+            </ViewLoader>
           }
         />
         {/*/!* Protected Routes - Elements *!/*/}
         <Route
-          path='dev3'
+          path='dev-rundown'
           element={
             <EditorFeatureWrapper>
               <RundownPanel />
@@ -157,14 +157,14 @@ export default function AppRouter() {
 }
 
 const PresetViewMap: Record<OntimeViewPresettable, ComponentType> = {
-  [OntimeView.Cuesheet]: Cuesheet,
-  [OntimeView.Operator]: Operator,
-  [OntimeView.Timer]: Timer,
-  [OntimeView.Backstage]: Backstage,
-  [OntimeView.Timeline]: Timeline,
-  [OntimeView.StudioClock]: StudioClock,
-  [OntimeView.Countdown]: Countdown,
-  [OntimeView.ProjectInfo]: ProjectInfo,
+  // [OntimeView.Cuesheet]: Cuesheet,
+  // [OntimeView.Operator]: Operator,
+  // [OntimeView.Timer]: Timer,
+  // [OntimeView.Backstage]: Backstage,
+  // [OntimeView.Timeline]: Timeline,
+  // [OntimeView.StudioClock]: StudioClock,
+  // [OntimeView.Countdown]: Countdown,
+  // [OntimeView.ProjectInfo]: ProjectInfo,
 };
 
 /**
