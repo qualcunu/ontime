@@ -40,7 +40,7 @@ export default function AppRouter() {
   return (
     <Suspense fallback={<Loader />}>
       <SentryRouter>
-        <Route path='/' element={<Navigate to='/timer' />} />
+        <Route path='/' element={<Navigate to='/preset/e/?stopCycle=true&showExpected=true&extra-info=custom-Color&n=1' />} />
         <Route
           path='timer'
           element={
