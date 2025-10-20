@@ -105,7 +105,7 @@ export default function OntimeActionForm({
             Timer direction
             <Select
               onValueChange={(value) => {
-                setValue(`outputs.${index}.flip1`);
+                setValue(`outputs.${index}.flip1`, { shouldDirty: true });
               }}
               value={watch(`outputs.${index}.flip1`)}
               options={[
@@ -124,7 +124,7 @@ export default function OntimeActionForm({
             Timer direction
             <Select
               onValueChange={(value) => {
-                setValue(`outputs.${index}.flip2`);
+                setValue(`outputs.${index}.flip2`, { shouldDirty: true });
               }}
               value={watch(`outputs.${index}.flip2`)}
               options={[
@@ -143,7 +143,7 @@ export default function OntimeActionForm({
             Timer direction
             <Select
               onValueChange={(value) => {
-                setValue(`outputs.${index}.flip3`);
+                setValue(`outputs.${index}.flip3`, { shouldDirty: true });
               }}
               value={watch(`outputs.${index}.flip3`)}
               options={[
