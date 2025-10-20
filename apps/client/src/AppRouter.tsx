@@ -42,7 +42,7 @@ export default function AppRouter() {
       <SentryRouter>
         <Route path='/' element={<Navigate to='/preset/e/?stopCycle=true&showExpected=true&extra-info=custom-Color&n=1' />} />
         <Route
-          path='dev-timer'
+          path=''
           element={
             <ViewLoader>
               <ViewNavigationMenu isNavigationLocked={getIsNavigationLocked()} />
@@ -160,7 +160,7 @@ const PresetViewMap: Record<OntimeViewPresettable, ComponentType> = {
   // [OntimeView.Cuesheet]: Cuesheet,
   // [OntimeView.Operator]: Operator,
   // [OntimeView.Timer]: Timer,
-  // [OntimeView.Backstage]: Backstage,
+  [OntimeView.Backstage]: Backstage,
   // [OntimeView.Timeline]: Timeline,
   // [OntimeView.StudioClock]: StudioClock,
   // [OntimeView.Countdown]: Countdown,
