@@ -58,12 +58,15 @@ const ontimeAuxTriggerAction = [
   'aux1-start',
   'aux1-stop',
   'aux1-pause',
+  'aux1-flip',
   'aux2-start',
   'aux2-stop',
   'aux2-pause',
+  'aux2-flip',
   'aux3-start',
   'aux3-stop',
   'aux3-pause',
+  'aux3-flip',
 ] as const;
 
 const ontimeAuxSetAction = ['aux1-set', 'aux2-set', 'aux3-set'] as const;
