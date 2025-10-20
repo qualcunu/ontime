@@ -58,6 +58,12 @@ export function toOntimeAction(action: OntimeAction) {
       });
       break;
     }
+    case 'aux1-rename': {
+      messageService.patch({
+        aux1label: { action.aux1label },
+      });
+      break;
+    }
 
     default: {
       actionType satisfies never;
