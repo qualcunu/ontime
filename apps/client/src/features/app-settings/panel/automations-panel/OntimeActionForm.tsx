@@ -18,6 +18,11 @@ interface OntimeActionFormProps {
     visible?: { message?: string };
     secondarySource?: { message?: string };
     aux1label?: { message?: string };
+    aux2label?: { message?: string };
+    aux3label?: { message?: string };
+    flip1?: { message?: string };
+    flip2?: { message?: string };
+    flip3?: { message?: string };
   };
   value: OntimeAction['action'];
   watch: UseFormWatch<AutomationDTO>;
@@ -92,6 +97,63 @@ export default function OntimeActionForm({
           />
           <Panel.Error>{rowErrors?.time?.message}</Panel.Error>
         </label>
+      )}
+
+        {selectedAction === 'aux1-flip' && (
+        <>
+          <label>
+            Timer direction
+            <Select
+              onValueChange={(value) => {
+                setValue(`outputs.${index}.flip1`);
+              }}
+              value={watch(`outputs.${index}.flip1`)}
+              options={[
+                { value: 'CountUp', label: 'Count up' },
+                { value: 'CountDown', label: 'Count down' },
+              ]}
+            />
+            <Panel.Error>{rowErrors?.flip1?.message}</Panel.Error>
+          </label>
+        </>
+      )}
+
+      {selectedAction === 'aux2-flip' && (
+        <>
+          <label>
+            Timer direction
+            <Select
+              onValueChange={(value) => {
+                setValue(`outputs.${index}.flip2`);
+              }}
+              value={watch(`outputs.${index}.flip2`)}
+              options={[
+                { value: 'CountUp', label: 'Count up' },
+                { value: 'CountDown', label: 'Count down' },
+              ]}
+            />
+            <Panel.Error>{rowErrors?.flip2?.message}</Panel.Error>
+          </label>
+        </>
+      )}
+
+      {selectedAction === 'aux3-flip' && (
+        <>
+          <label>
+            Timer direction
+            <Select
+              onValueChange={(value) => {
+                setValue(`outputs.${index}.flip3`);
+              }}
+              value={watch(`outputs.${index}.flip3`)}
+              options={[
+                { value: 'CountUp', label: 'Count up' },
+                { value: 'CountDown', label: 'Count down' },
+              ]}
+            />
+            <Panel.Error>{rowErrors?.flip3?.message}</Panel.Error>
+          </label>
+        </>
       )}
 
       {selectedAction === 'message-set' && (
