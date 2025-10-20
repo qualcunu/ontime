@@ -69,6 +69,8 @@ export default function OntimeActionForm({
             { value: 'message-set', label: 'Primary Message: set' },
             { value: 'message-secondary', label: 'Secondary Message: source' },
             { value: 'aux1-rename', label: 'Aux 1 Label' },
+            { value: 'aux2-rename', label: 'Aux 2 Label' },
+            { value: 'aux3-rename', label: 'Aux 3 Label' },
           ]}
         />
         <Panel.Error>{rowErrors?.action?.message}</Panel.Error>
@@ -142,6 +144,26 @@ export default function OntimeActionForm({
             Text (leave empty for no change)
             <Input {...register(`outputs.${index}.aux1label`)} fluid placeholder='eg: Aux 1 Label' />
             <Panel.Error>{rowErrors?.aux1label?.message}</Panel.Error>
+          </label>
+        </>
+      )}
+
+      {selectedAction === 'aux2-rename' && (
+        <>
+          <label>
+            Text (leave empty for no change)
+            <Input {...register(`outputs.${index}.aux2label`)} fluid placeholder='eg: Aux 2 Label' />
+            <Panel.Error>{rowErrors?.aux2label?.message}</Panel.Error>
+          </label>
+        </>
+      )}
+
+      {selectedAction === 'aux3-rename' && (
+        <>
+          <label>
+            Text (leave empty for no change)
+            <Input {...register(`outputs.${index}.aux3label`)} fluid placeholder='eg: Aux 3 Label' />
+            <Panel.Error>{rowErrors?.aux3label?.message}</Panel.Error>
           </label>
         </>
       )}
