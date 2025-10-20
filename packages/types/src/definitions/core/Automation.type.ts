@@ -88,7 +88,7 @@ export const ontimeActionKeyValues = [
   'message-set',
   'message-secondary',
   'aux1-flip',
-  'aux2-flip,
+  'aux2-flip',
   'aux3-flip',
   'aux1-rename',
   'aux2-rename',
