@@ -5,6 +5,7 @@ import { AutomationDTO, OntimeAction, OntimeActionKey, SecondarySource } from 'o
 import Input from '../../../../common/components/input/input/Input';
 import Select from '../../../../common/components/select/Select';
 import * as Panel from '../../panel-utils/PanelUtils';
+import { SimpleDirection } from './AuxTimer.type.js';
 
 import style from './AutomationForm.module.scss';
 
@@ -109,8 +110,8 @@ export default function OntimeActionForm({
               }}
               value={watch(`outputs.${index}.flip1`)}
               options={[
-                { value: 'CountUp', label: 'Count up' },
-                { value: 'CountDown', label: 'Count down' },
+                { value: SimpleDirection.CountUp, label: 'Count up' },
+                { value: SimpleDirection.CountDown, label: 'Count down' },
               ]}
             />
             <Panel.Error>{rowErrors?.flip1?.message}</Panel.Error>
