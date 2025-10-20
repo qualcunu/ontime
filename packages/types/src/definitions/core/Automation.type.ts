@@ -1,4 +1,4 @@
-import type { SecondarySource, MessageState } from '../runtime/MessageControl.type.js';
+import type { SecondarySource } from '../runtime/MessageControl.type.js';
 import type { TimerLifeCycle } from './TimerLifecycle.type.js';
 
 export type AutomationSettings = {
