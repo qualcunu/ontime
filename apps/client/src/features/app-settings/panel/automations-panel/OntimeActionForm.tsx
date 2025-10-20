@@ -109,8 +109,8 @@ export default function OntimeActionForm({
               }}
               value={watch(`outputs.${index}.flip1`)}
               options={[
-                { value: 'Count-Up', label: 'Count up' },
-                { value: 'Count-Down', label: 'Count down' },
+                { value: 'CountUp', label: 'Count up' },
+                { value: 'CountDown', label: 'Count down' },
               ]}
             />
             <Panel.Error>{rowErrors?.flip1?.message}</Panel.Error>
@@ -128,8 +128,8 @@ export default function OntimeActionForm({
               }}
               value={watch(`outputs.${index}.flip2`)}
               options={[
-                { value: 'Count-Up', label: 'Count up' },
-                { value: 'Count-Down', label: 'Count down' },
+                { value: 'CountUp', label: 'Count up' },
+                { value: 'CountDown', label: 'Count down' },
               ]}
             />
             <Panel.Error>{rowErrors?.flip2?.message}</Panel.Error>
@@ -147,8 +147,8 @@ export default function OntimeActionForm({
               }}
               value={watch(`outputs.${index}.flip3`)}
               options={[
-                { value: 'Count-Up', label: 'Count up' },
-                { value: 'Count-Down', label: 'Count down' },
+                { value: 'CountUp', label: 'Count up' },
+                { value: 'CountDown', label: 'Count down' },
               ]}
             />
             <Panel.Error>{rowErrors?.flip3?.message}</Panel.Error>
