@@ -16,7 +16,7 @@ export function toOntimeAction(action: OntimeAction) {
     case 'aux1-pause':
       return auxTimerService.pause(1);
     case 'aux1-flip':
-      return auxTimerService.flip(1);
+      return auxTimerService.setDirection(action.flip1, 1);
     case 'aux1-set': {
       const time = parseUserTime(action.time);
       return auxTimerService.setTime(time, 1);
@@ -28,7 +28,7 @@ export function toOntimeAction(action: OntimeAction) {
     case 'aux2-pause':
       return auxTimerService.pause(2);
     case 'aux2-flip':
-      return auxTimerService.flip(2);
+      return auxTimerService.setDirection(action.flip2, 2);
     case 'aux2-set': {
       const time = parseUserTime(action.time);
       return auxTimerService.setTime(time, 2);
@@ -40,7 +40,7 @@ export function toOntimeAction(action: OntimeAction) {
     case 'aux3-pause':
       return auxTimerService.pause(3);
     case 'aux3-flip':
-      return auxTimerService.flip(3);
+      return auxTimerService.setDirection(action.flip3, 3);
     case 'aux3-set': {
       const time = parseUserTime(action.time);
       return auxTimerService.setTime(time, 3);
