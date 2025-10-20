@@ -66,6 +66,10 @@ export default function OntimeActionForm({
             { value: 'aux2-set', label: 'Aux 2: set' },
             { value: 'aux3-set', label: 'Aux 3: set' },
 
+            { value: 'aux1-flip', label: 'Aux 1: change direction' },
+            { value: 'aux2-flip', label: 'Aux 2: change direction' },
+            { value: 'aux3-flip', label: 'Aux 3: change direction' },
+
             { value: 'message-set', label: 'Primary Message: set' },
             { value: 'message-secondary', label: 'Secondary Message: source' },
             { value: 'aux1-rename', label: 'Aux 1 Label' },
