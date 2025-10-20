@@ -1,4 +1,4 @@
-import type { SecondarySource } from '../runtime/MessageControl.type.js';
+import type { SecondarySource, MessageState } from '../runtime/MessageControl.type.js';
 import type { TimerLifeCycle } from './TimerLifecycle.type.js';
 
 export type AutomationSettings = {
@@ -72,14 +72,21 @@ type OntimeAuxTriggerAction = (typeof ontimeAuxTriggerAction)[number];
 type OntimeAuxSetAction = (typeof ontimeAuxSetAction)[number];
 type OntimeMessageSet = 'message-set';
 type OntimeMessageSecondary = 'message-secondary';
+type OntimeMessageAux1 = 'aux1-rename';
+type OntimeMessageAux2 = 'aux2-rename';
+type OntimeMessageAux3 = 'aux3-rename';
 
-export type OntimeActionKey = OntimeAuxTriggerAction | OntimeAuxSetAction | OntimeMessageSet | OntimeMessageSecondary;
+
+export type OntimeActionKey = OntimeAuxTriggerAction | OntimeAuxSetAction | OntimeMessageSet | OntimeMessageSecondary | OntimeMessageAux1 | OntimeMessageAux2 | OntimeMessageAux3;
 
 export const ontimeActionKeyValues = [
   ...ontimeAuxTriggerAction,
   ...ontimeAuxSetAction,
   'message-set',
   'message-secondary',
+  'aux1-rename',
+  'aux2-rename',
+  'aux3-rename',
 ];
 
 export type OntimeAction =
@@ -102,4 +109,19 @@ export type OntimeAction =
       type: 'ontime';
       action: OntimeMessageSecondary;
       secondarySource: SecondarySource;
+    }
+  | {
+      type: 'ontime';
+      action: OntimeMessageAux1;
+      aux1label: string;
+    }
+  | {
+      type: 'ontime';
+      action: OntimeMessageAux2;
+      aux2label: string;
+    }
+  | {
+      type: 'ontime';
+      action: OntimeMessageAux3;
+      aux3label: string;
     };
