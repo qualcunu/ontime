@@ -17,6 +17,7 @@ interface OntimeActionFormProps {
     text?: { message?: string };
     visible?: { message?: string };
     secondarySource?: { message?: string };
+    aux1label?: { message?: string };
   };
   value: OntimeAction['action'];
   watch: UseFormWatch<AutomationDTO>;
@@ -67,6 +68,7 @@ export default function OntimeActionForm({
 
             { value: 'message-set', label: 'Primary Message: set' },
             { value: 'message-secondary', label: 'Secondary Message: source' },
+            { value: 'aux1-rename', label: 'Aux 1 Label' },
           ]}
         />
         <Panel.Error>{rowErrors?.action?.message}</Panel.Error>
@@ -133,6 +135,17 @@ export default function OntimeActionForm({
           <Panel.Error>{rowErrors?.secondarySource?.message}</Panel.Error>
         </label>
       )}
+
+      {selectedAction === 'aux1-rename' && (
+        <>
+          <label>
+            Text (leave empty for no change)
+            <Input {...register(`outputs.${index}.aux1label`)} fluid placeholder='eg: Aux 1 Label' />
+            <Panel.Error>{rowErrors?.aux1label?.message}</Panel.Error>
+          </label>
+        </>
+      )}
+
       <div className={style.test}>{children}</div>
     </div>
   );
