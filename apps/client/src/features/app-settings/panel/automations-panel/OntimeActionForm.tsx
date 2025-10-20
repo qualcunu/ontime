@@ -124,7 +124,7 @@ export default function OntimeActionForm({
             Timer direction
             <Select
               onValueChange={(value) => {
-                setValue(`outputs.${index}.flip2', value as SimpleDirection, { shouldDirty: true });
+                setValue(`outputs.${index}.flip2`, value as SimpleDirection, { shouldDirty: true });
               }}
               value={watch(`outputs.${index}.flip2`)}
               options={[
