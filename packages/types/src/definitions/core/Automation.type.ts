@@ -113,15 +113,15 @@ export type OntimeAction =
   | {
       type: 'ontime';
       action: OntimeMessageAux1;
-      aux1label: string;
+      aux1label?: string;
     }
   | {
       type: 'ontime';
       action: OntimeMessageAux2;
-      aux2label: string;
+      aux2label?: string;
     }
   | {
       type: 'ontime';
       action: OntimeMessageAux3;
-      aux3label: string;
+      aux3label?: string;
     };
