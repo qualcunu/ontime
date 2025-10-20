@@ -58,15 +58,12 @@ const ontimeAuxTriggerAction = [
   'aux1-start',
   'aux1-stop',
   'aux1-pause',
-  'aux1-flip',
   'aux2-start',
   'aux2-stop',
   'aux2-pause',
-  'aux2-flip',
   'aux3-start',
   'aux3-stop',
   'aux3-pause',
-  'aux3-flip',
 ] as const;
 
 const ontimeAuxSetAction = ['aux1-set', 'aux2-set', 'aux3-set'] as const;
@@ -75,18 +72,24 @@ type OntimeAuxTriggerAction = (typeof ontimeAuxTriggerAction)[number];
 type OntimeAuxSetAction = (typeof ontimeAuxSetAction)[number];
 type OntimeMessageSet = 'message-set';
 type OntimeMessageSecondary = 'message-secondary';
+type OntimeFlipAux1 = 'aux1-flip';
+type OntimeFlipAux2 = 'aux2-flip';
+type OntimeFlipAux3 = 'aux3-flip';
 type OntimeMessageAux1 = 'aux1-rename';
 type OntimeMessageAux2 = 'aux2-rename';
 type OntimeMessageAux3 = 'aux3-rename';
 
 
-export type OntimeActionKey = OntimeAuxTriggerAction | OntimeAuxSetAction | OntimeMessageSet | OntimeMessageSecondary | OntimeMessageAux1 | OntimeMessageAux2 | OntimeMessageAux3;
+export type OntimeActionKey = OntimeAuxTriggerAction | OntimeAuxSetAction | OntimeMessageSet | OntimeMessageSecondary | OntimeMessageAux1 | OntimeMessageAux2 | OntimeMessageAux3 | OntimeMessageAux1 | OntimeMessageAux2 | OntimeMessageAux3;
 
 export const ontimeActionKeyValues = [
   ...ontimeAuxTriggerAction,
   ...ontimeAuxSetAction,
   'message-set',
   'message-secondary',
+  'aux1-flip',
+  'aux2-flip,
+  'aux3-flip',
   'aux1-rename',
   'aux2-rename',
   'aux3-rename',
@@ -112,6 +115,21 @@ export type OntimeAction =
       type: 'ontime';
       action: OntimeMessageSecondary;
       secondarySource: SecondarySource;
+    }
+  | {
+      type: 'ontime';
+      action: OntimeFlipAux1;
+      flip1: string;
+    }
+  | {
+      type: 'ontime';
+      action: OntimeFlipAux2;
+      flip2: string;
+    }
+  | {
+      type: 'ontime';
+      action: OntimeFlipAux3;
+      flip3: string;
     }
   | {
       type: 'ontime';
