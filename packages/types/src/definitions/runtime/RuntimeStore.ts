@@ -26,9 +26,9 @@ export const runtimeStorePlaceholder: Readonly<RuntimeStore> = {
       secondarySource: null,
     },
     secondary: '',
-    aux1label: '',
-    aux2label: '',
-    aux3label: '',
+    aux1label: 'House opens in:',
+    aux2label: 'Total Runtime:',
+    aux3label: 'Next break in:',
   },
   rundown: {
     selectedEventIndex: null, // changes if rundown changes or we load a new event
