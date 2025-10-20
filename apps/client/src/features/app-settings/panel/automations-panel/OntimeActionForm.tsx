@@ -109,8 +109,8 @@ export default function OntimeActionForm({
               }}
               value={watch(`outputs.${index}.flip1`)}
               options={[
-                { value: SimpleDirection.CountUp, label: 'Count up' },
-                { value: SimpleDirection.CountDown, label: 'Count down' },
+                { value: 'Count-Up', label: 'Count up' },
+                { value: 'Count-Down', label: 'Count down' },
               ]}
             />
             <Panel.Error>{rowErrors?.flip1?.message}</Panel.Error>
@@ -124,12 +124,12 @@ export default function OntimeActionForm({
             Timer direction
             <Select
               onValueChange={(value) => {
-                setValue(`outputs.${index}.flip1`, value as SimpleDirection, { shouldDirty: true });
+                setValue(`outputs.${index}.flip2', value as SimpleDirection, { shouldDirty: true });
               }}
               value={watch(`outputs.${index}.flip2`)}
               options={[
-                { value: SimpleDirection.CountUp, label: 'Count up' },
-                { value: SimpleDirection.CountDown, label: 'Count down' },
+                { value: 'Count-Up', label: 'Count up' },
+                { value: 'Count-Down', label: 'Count down' },
               ]}
             />
             <Panel.Error>{rowErrors?.flip2?.message}</Panel.Error>
@@ -143,12 +143,12 @@ export default function OntimeActionForm({
             Timer direction
             <Select
               onValueChange={(value) => {
-                setValue(`outputs.${index}.flip1`, value as SimpleDirection, { shouldDirty: true });
+                setValue(`outputs.${index}.flip3`, value as SimpleDirection, { shouldDirty: true });
               }}
               value={watch(`outputs.${index}.flip3`)}
               options={[
-                { value: SimpleDirection.CountUp, label: 'Count up' },
-                { value: SimpleDirection.CountDown, label: 'Count down' },
+                { value: 'Count-Up', label: 'Count up' },
+                { value: 'Count-Down', label: 'Count down' },
               ]}
             />
             <Panel.Error>{rowErrors?.flip3?.message}</Panel.Error>
