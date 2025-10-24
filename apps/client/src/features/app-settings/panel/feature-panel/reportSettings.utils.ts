@@ -12,6 +12,7 @@ export type CombinedReport = {
   actualStart: MaybeNumber;
   scheduledEnd: number;
   actualEnd: MaybeNumber;
+  note: string;
 };
 
 /**
@@ -34,16 +35,17 @@ export function getCombinedReport(
     if (!entry || !isOntimeEvent(entry)) continue;
 
     if (!(id in report)) {
-      combinedReport.push({
-        id: id,
-        index: index,
-        title: entry.title,
-        cue: entry.cue,
-        scheduledStart: entry.timeStart,
-        actualEnd: null,
-        scheduledEnd: entry.timeEnd,
-        actualStart: null,
-      });
+      // combinedReport.push({
+      //   id: id,
+      //   index: index,
+      //   title: entry.title,
+      //   cue: entry.cue,
+      //   scheduledStart: entry.timeStart,
+      //   actualEnd: null,
+      //   scheduledEnd: entry.timeEnd,
+      //   actualStart: null,
+      //   note: entry.note,
+      // });
     }
 
     if (id in report) {
@@ -56,6 +58,7 @@ export function getCombinedReport(
         actualEnd: report[id].endedAt,
         scheduledEnd: entry.timeEnd,
         actualStart: report[id].startedAt,
+        note: entry.note,
       });
     }
     index++;
@@ -64,7 +67,7 @@ export function getCombinedReport(
   return combinedReport;
 }
 
-const csvHeader = ['Index', 'Title', 'Cue', 'Scheduled Start', 'Actual Start', 'Scheduled End', 'Actual End'];
+const csvHeader = ['Index', 'Title', 'Cue', 'Scheduled Start', 'Actual Start', 'Scheduled End', 'Actual End', 'Note'];
 
 /**
  * Transforms a CombinedReport into a CSV string
@@ -82,6 +85,7 @@ export function makeReportCSV(combinedReport: CombinedReport[]) {
       formatTime(entry.actualStart),
       formatTime(entry.scheduledEnd),
       formatTime(entry.actualEnd),
+      entry.note,
     ]);
   }
 
