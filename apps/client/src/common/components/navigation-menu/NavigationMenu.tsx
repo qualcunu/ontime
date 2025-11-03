@@ -6,9 +6,11 @@ import { useLocation } from 'react-router';
 import { Dialog } from '@base-ui-components/react/dialog';
 import { useDisclosure, useFullscreen } from '@mantine/hooks';
 
+import useInfo from '../../../hooks-query/useInfo';
 import { isLocalhost,serverURL } from '../../../externals';
 import { useKeepAwakeOptions } from '../../../features/keep-awake/KeepAwake';
 import { navigatorConstants } from '../../../viewerConfig';
+import { linkToOtherHost } from '../../../utils/linkUtils';
 import { useClientStore } from '../../stores/clientStore';
 import { useViewOptionsStore } from '../../stores/viewOptions';
 import IconButton from '../buttons/IconButton';
@@ -25,7 +27,14 @@ interface NavigationMenuProps {
   isOpen: boolean;
   onClose: () => void;
 }
+
+const { data } = useInfo();
+{data?.networkInterfaces?.map((nif) => {
+  if (nif.name === 'localhost') {
+    return null;
+  }
 const url = serverURL;
+
 export default memo(NavigationMenu);
 function NavigationMenu({ isOpen, onClose }: NavigationMenuProps) {
   const id = useClientStore((store) => store.id);
@@ -98,7 +107,7 @@ function NavigationMenu({ isOpen, onClose }: NavigationMenuProps) {
 
           {isLocalhost && (
             <div>
-              <QRCode size={130} value={serverURL} className={style.qrCode} style={{padding: '0.5rem', backgroundColor: 'White', borderRadius: '2px'}} />
+              <QRCode size={130} value={linkToOtherHost(nif.address)} className={style.qrCode} style={{padding: '0.5rem', backgroundColor: 'White', borderRadius: '2px'}} />
               <OtherAddresses currentLocation={location.pathname} />
             </div>
           )}
