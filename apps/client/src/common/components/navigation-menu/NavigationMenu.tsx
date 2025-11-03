@@ -5,7 +5,7 @@ import { useLocation } from 'react-router';
 import { Dialog } from '@base-ui-components/react/dialog';
 import { useDisclosure, useFullscreen } from '@mantine/hooks';
 
-import { isLocalhost } from '../../../externals';
+import { isLocalhost,serverURL } from '../../../externals';
 import { useKeepAwakeOptions } from '../../../features/keep-awake/KeepAwake';
 import { navigatorConstants } from '../../../viewerConfig';
 import { useClientStore } from '../../stores/clientStore';
@@ -97,6 +97,7 @@ function NavigationMenu({ isOpen, onClose }: NavigationMenuProps) {
 
           {isLocalhost && (
             <div>
+              <QRCode size={130} value={serverURL} className={style.qrCode} />
               <OtherAddresses currentLocation={location.pathname} />
             </div>
           )}
