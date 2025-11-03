@@ -25,7 +25,7 @@ interface NavigationMenuProps {
   isOpen: boolean;
   onClose: () => void;
 }
-
+const url = serverURL;
 export default memo(NavigationMenu);
 function NavigationMenu({ isOpen, onClose }: NavigationMenuProps) {
   const id = useClientStore((store) => store.id);
@@ -98,7 +98,7 @@ function NavigationMenu({ isOpen, onClose }: NavigationMenuProps) {
 
           {isLocalhost && (
             <div>
-              <QRCode size={130} value={serverURL} className={style.qrCode} />
+              <QRCode size={130} value={serverURL} className={style.qrCode} style={{padding: '0.5rem', backgroundColor: 'White', borderRadius: '2px'}} />
               <OtherAddresses currentLocation={location.pathname} />
             </div>
           )}
