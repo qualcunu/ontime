@@ -1,4 +1,5 @@
 import { memo } from 'react';
+import QRCode from 'react-qr-code';
 import { IoClose, IoContract, IoExpand, IoLockClosedOutline, IoSwapVertical } from 'react-icons/io5';
 import { LuCoffee } from 'react-icons/lu';
 import { useLocation } from 'react-router';
