@@ -3,7 +3,6 @@ import { EntryId, isOntimeEvent, MaybeNumber, OntimeReport, RundownEntries } fro
 import { makeCSVFromArrayOfArrays } from '../../../../common/utils/csv';
 import { formatTime } from '../../../../common/utils/time';
 
-entrycount = 0;
 
 export type CombinedReport = {
   id: EntryId;
@@ -15,7 +14,6 @@ export type CombinedReport = {
   scheduledEnd: number;
   actualEnd: MaybeNumber;
   note: string;
-  entrycount: number;
 };
 
 
@@ -49,12 +47,10 @@ export function getCombinedReport(
       //   scheduledEnd: entry.timeEnd,
       //   actualStart: null,
       //   note: entry.note,
-      //   entrycount: entrycount,
       // });
     }
 
     if (id in report) {
-      entrycount = entrycount+1;
       combinedReport.push({
         id: id,
         index: index,
@@ -74,7 +70,7 @@ export function getCombinedReport(
   return combinedReport;
 }
 
-const csvHeader = ['Index', 'Title', 'Cue', 'Scheduled Start', 'Actual Start', 'Scheduled End', 'Actual End', 'Note', 'entrycount'];
+const csvHeader = ['Index', 'Title', 'Cue', 'Scheduled Start', 'Actual Start', 'Scheduled End', 'Actual End', 'Note'];
 
 /**
  * Transforms a CombinedReport into a CSV string
@@ -93,7 +89,6 @@ export function makeReportCSV(combinedReport: CombinedReport[]) {
       formatTime(entry.scheduledEnd),
       formatTime(entry.actualEnd),
       entry.note,
-      entry.entrycount,
     ]);
   }
 
