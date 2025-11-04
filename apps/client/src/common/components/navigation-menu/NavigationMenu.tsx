@@ -1,12 +1,12 @@
 import { memo } from 'react';
-import QRCode from 'react-qr-code';
+//import QRCode from 'react-qr-code';
 import { IoClose, IoContract, IoExpand, IoLockClosedOutline, IoSwapVertical } from 'react-icons/io5';
 import { LuCoffee } from 'react-icons/lu';
 import { useLocation } from 'react-router';
 import { Dialog } from '@base-ui-components/react/dialog';
 import { useDisclosure, useFullscreen } from '@mantine/hooks';
 
-import useInfo from '../../../hooks-query/useInfo';
+//import useInfo from '../../../hooks-query/useInfo';
 import { isLocalhost } from '../../../externals';
 import { useKeepAwakeOptions } from '../../../features/keep-awake/KeepAwake';
 import { navigatorConstants } from '../../../viewerConfig';
@@ -39,13 +39,7 @@ function NavigationMenu({ isOpen, onClose }: NavigationMenuProps) {
   const { keepAwake, toggleKeepAwake } = useKeepAwakeOptions();
   const location = useLocation();
   
-  const { data } = useInfo();
-    {data?.networkInterfaces?.map((nif) => {
-      if (nif.name === 'localhost') {
-        return null;
-      }
-    }
-  }
+
   return (
     <Dialog.Root
       open={isOpen}
@@ -107,7 +101,6 @@ function NavigationMenu({ isOpen, onClose }: NavigationMenuProps) {
 
           {isLocalhost && (
             <div>
-              <QRCode size={130} value={linkToOtherHost(nif.address)} className={style.qrCode} style={{padding: '0.5rem', backgroundColor: 'White', borderRadius: '2px'}} />
               <OtherAddresses currentLocation={location.pathname} />
             </div>
           )}
