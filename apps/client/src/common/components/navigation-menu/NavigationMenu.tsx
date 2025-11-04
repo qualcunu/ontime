@@ -101,7 +101,7 @@ function NavigationMenu({ isOpen, onClose }: NavigationMenuProps) {
 
           {isLocalhost && (
             <div>
-              <OtherAddresses currentLocation={location.pathname} />
+              <OtherAddresses currentLocation={'/'} />
             </div>
           )}
         </Dialog.Popup>
