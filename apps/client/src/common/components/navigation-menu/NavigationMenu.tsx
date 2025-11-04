@@ -44,6 +44,7 @@ function NavigationMenu({ isOpen, onClose }: NavigationMenuProps) {
       if (nif.name === 'localhost') {
         return null;
       }
+    }
   }
   return (
     <Dialog.Root
