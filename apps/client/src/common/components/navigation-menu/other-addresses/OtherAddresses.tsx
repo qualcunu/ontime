@@ -1,4 +1,5 @@
 import { IoArrowUp } from 'react-icons/io5';
+import QRCode from 'react-qr-code';
 
 import useInfo from '../../../hooks-query/useInfo';
 import { linkToOtherHost, openLink } from '../../../utils/linkUtils';
@@ -30,6 +31,7 @@ export default function OtherAddresses({ currentLocation }: OtherAddressesProps)
           const address = linkToOtherHost(nif.address, currentLocation);
 
           return (
+            <QRCode size={130} value={nif.address} className={style.qrCode} style={{padding: '0.5rem', backgroundColor: 'White', borderRadius: '2px'}} />
             <CopyTag key={nif.name} copyValue={address} onClick={() => openLink(address)} size='small'>
               <span className={style.interfaceCopy}>
                 {nif.address} <IoArrowUp className={style.goIcon} />
