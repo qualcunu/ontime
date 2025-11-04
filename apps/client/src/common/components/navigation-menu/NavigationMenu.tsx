@@ -7,7 +7,7 @@ import { Dialog } from '@base-ui-components/react/dialog';
 import { useDisclosure, useFullscreen } from '@mantine/hooks';
 
 import useInfo from '../../../hooks-query/useInfo';
-import { isLocalhost,serverURL } from '../../../externals';
+import { isLocalhost } from '../../../externals';
 import { useKeepAwakeOptions } from '../../../features/keep-awake/KeepAwake';
 import { navigatorConstants } from '../../../viewerConfig';
 import { linkToOtherHost } from '../../../utils/linkUtils';
@@ -28,13 +28,6 @@ interface NavigationMenuProps {
   onClose: () => void;
 }
 
-const { data } = useInfo();
-{data?.networkInterfaces?.map((nif) => {
-  if (nif.name === 'localhost') {
-    return null;
-  }
-const url = serverURL;
-
 export default memo(NavigationMenu);
 function NavigationMenu({ isOpen, onClose }: NavigationMenuProps) {
   const id = useClientStore((store) => store.id);
@@ -45,7 +38,13 @@ function NavigationMenu({ isOpen, onClose }: NavigationMenuProps) {
   const { mirror, toggleMirror } = useViewOptionsStore();
   const { keepAwake, toggleKeepAwake } = useKeepAwakeOptions();
   const location = useLocation();
-
+  
+  const { data } = useInfo();
+    {data?.networkInterfaces?.map((nif) => {
+      if (nif.name === 'localhost') {
+        return null;
+      }
+  }
   return (
     <Dialog.Root
       open={isOpen}
