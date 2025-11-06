@@ -61,7 +61,6 @@ export function getCombinedReport(
         scheduledEnd: entry.timeEnd,
         actualStart: report[id].startedAt,
         note: entry.note,
-        entrycount: entrycount,
       });
     }
     index++;
