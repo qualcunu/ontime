@@ -109,7 +109,7 @@ export default function AppRouter() {
         />
         {/*/!* Protected Routes - Elements *!/*/}
         <Route
-          path='dev-rundown'
+          path='dev0'
           element={
             <EditorFeatureWrapper>
               <RundownPanel />
